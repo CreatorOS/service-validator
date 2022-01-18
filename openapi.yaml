@@ -1,0 +1,121 @@
+openapi: 3.0.1
+info:
+  title: QuestBook Grant Validator
+  version: 0.1.0
+  description: Validates the data for a grant, uploads & pins it to IPFS
+servers:
+  - url: http://localhost:3001
+    description: Local server
+  - url: https://api-grant-validator.questbook.app
+    description: Production server
+paths:
+  /validate:
+    post:
+      operationId: validate
+      summary: Validate, upload & pin grant to IPFS
+      tags:
+        - Validation
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GrantApplication'
+      responses:
+        '200':
+          $ref: '#/components/responses/ValidationSuccessResponse'
+        '400':
+          $ref: '#/components/responses/ErrorResponse'
+        '500':
+          $ref: '#/components/responses/ErrorResponse'
+components:
+  schemas:
+    Error:
+      type: object
+      required:
+        - statusCode
+        - error
+        - message
+      properties:
+        statusCode:
+          type: number
+          minimum: 200
+          maximum: 505
+        error:
+          type: string
+          description: Specific description of the error
+        message:
+          type: string
+          description: What the error was
+        data:
+          type: object
+          description: Some extra information about the error
+    GrantReleaseType:
+      type: string
+      enum:
+        - single
+        - milestone
+    GrantApplication:
+      type: object
+      additionalProperties: false
+      required:
+        - title
+        - description
+        - amount
+        - releaseType
+        - ownerId
+      properties:
+        title:
+          type: string
+          minimum: 5
+          maximum: 255
+        description:
+          type: string
+          minimum: 5
+        amount:
+          type: object
+          additionalProperties: false
+          required:
+            - value
+            - token
+          properties:
+            value:
+              type: number
+              minimum: 0
+              example: 10.5
+            token:
+              type: string
+              example: ETH
+        releaseType:
+          $ref: "#/components/schemas/GrantReleaseType"
+        ownerId:
+          $ref: "#/components/schemas/OwnerID"
+    OwnerID:
+      type: string
+      minimum: 16
+      maximum: 255
+      example: '0x71C7656EC7ab88b098defB751B7411C5f6d8976F'
+  responses:
+    ValidationSuccessResponse:
+      description: Validation was success, data pushed to IPFS & pinned
+      content:
+        application/json:
+          schema:
+            type: object
+            additionalProperties: false
+            required:
+              - ipfsHash
+              - url
+            properties:
+              ipfsHash:
+                type: string
+                example: QmXoypizjW3WknFiJnKLwHCnL72vedxjQkDDP1mXWo6uco
+              url:
+                type: string
+                format: uri
+                example: https://ipfs.io/ipfs/QmXoypizjW3WknFiJnKLwHCnL72vedxjQkDDP1mXWo6uco
+    ErrorResponse:
+      description: Generic error response
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
