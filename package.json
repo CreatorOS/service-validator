@@ -4,7 +4,7 @@
   "description": "Service to validate grant application data & push to IPFS",
   "main": ".build/index.js",
   "scripts": {
-    "start": "sls offline start",
+    "start": "sls offline start --httpPort 3001",
     "generate:types": "yarn ts-node src/utils/generate-types",
     "generate:routes-index": "yarn ts-node src/utils/generate-routes-index",
     "test": "NODE_ENV=test jest",
