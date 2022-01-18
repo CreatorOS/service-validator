@@ -1,4 +1,5 @@
-require('../utils/env').default()
+import configEnv from '../utils/env'
+configEnv()
 
 import { Application } from 'express'
 import makeTestServer from './make-test-server'

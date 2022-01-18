@@ -1,4 +1,5 @@
-require('../utils/env').default() // configure environment first thing
+import configEnv from '../utils/env'
+configEnv()
 
 import { APIGatewayProxyEvent, Context } from 'aws-lambda'
 import ROUTES from '../routes'
