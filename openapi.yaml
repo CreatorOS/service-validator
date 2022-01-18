@@ -80,7 +80,7 @@ components:
           properties:
             value:
               type: number
-              minimum: 0
+              minimum: 0.001
               example: 10.5
             token:
               type: string
@@ -108,10 +108,11 @@ components:
             properties:
               ipfsHash:
                 type: string
+                description: IPFS hash of the uploaded grant
                 example: QmXoypizjW3WknFiJnKLwHCnL72vedxjQkDDP1mXWo6uco
               url:
                 type: string
-                format: uri
+                description: http url that can be used to fetch the uploaded grant file
                 example: https://ipfs.io/ipfs/QmXoypizjW3WknFiJnKLwHCnL72vedxjQkDDP1mXWo6uco
     ErrorResponse:
       description: Generic error response

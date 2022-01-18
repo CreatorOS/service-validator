@@ -1,0 +1,8 @@
+.env.production
+.env.development
+.idea
+node_modules
+.build
+.serverless
+.DS_Store
+.eslintcache
