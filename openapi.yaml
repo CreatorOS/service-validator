@@ -209,7 +209,8 @@ components:
         - summary
         - details
         - amount
-        - ownerId
+        - creatorId
+        - workspaceId
         - fields
       properties:
         title:
@@ -240,8 +241,11 @@ components:
               example: 10.5
             network:
               $ref: "#/components/schemas/SupportedNetwork"
-        ownerId:
+        creatorId:
           $ref: "#/components/schemas/OwnerID"
+        workspaceId:
+          type: string
+          description: the workspace the grant is from
         fields:
           type: array
           minimum: 1

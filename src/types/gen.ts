@@ -79,7 +79,9 @@ export interface components {
         value: number;
         network: components["schemas"]["SupportedNetwork"];
       };
-      ownerId: components["schemas"]["OwnerID"];
+      creatorId: components["schemas"]["OwnerID"];
+      /** @description the workspace the grant is from */
+      workspaceId: string;
       fields: components["schemas"]["GrantField"][];
     };
     /** @example 0x71C7656EC7ab88b098defB751B7411C5f6d8976F */

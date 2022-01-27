@@ -67,7 +67,8 @@ const FAIL_APPS = [
 			value: 0,
 			network: 'ETH'
 		},
-		ownerId: chance.guid(),
+		creatorId: chance.guid(),
+		workspaceId: chance.guid(),
 		fields: [...Array(5)].map(
 			() => ({
 				id: chance.guid(),
@@ -87,7 +88,8 @@ const PASS_APPS: IGrantCreateRequest[] = [
 			value: 100,
 			network: 'ETH'
 		},
-		ownerId: chance.guid(),
+		creatorId: chance.guid(),
+		workspaceId: chance.guid(),
 		fields: [...Array(5)].map(
 			() => ({
 				id: chance.guid(),
@@ -104,7 +106,8 @@ const PASS_APPS: IGrantCreateRequest[] = [
 			value: 1.1,
 			network: 'ETH'
 		},
-		ownerId: chance.guid(),
+		creatorId: chance.guid(),
+		workspaceId: chance.guid(),
 		fields: [...Array(1)].map(
 			() => ({
 				id: chance.guid(),
