@@ -210,6 +210,7 @@ components:
         - details
         - amount
         - ownerId
+        - fields
       properties:
         title:
           type: string
@@ -243,6 +244,7 @@ components:
           $ref: "#/components/schemas/OwnerID"
         fields:
           type: array
+          minimum: 1
           maximum: 100
           items:
             $ref: "#/components/schemas/GrantField"

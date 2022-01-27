@@ -80,7 +80,7 @@ export interface components {
         network: components["schemas"]["SupportedNetwork"];
       };
       ownerId: components["schemas"]["OwnerID"];
-      fields?: components["schemas"]["GrantField"][];
+      fields: components["schemas"]["GrantField"][];
     };
     /** @example 0x71C7656EC7ab88b098defB751B7411C5f6d8976F */
     OwnerID: string;

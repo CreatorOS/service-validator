@@ -65,10 +65,16 @@ const FAIL_APPS = [
 		description: chance.paragraph(),
 		amount: {
 			value: 0,
-			token: 'ETH'
+			network: 'ETH'
 		},
-		releaseType: 'single',
 		ownerId: chance.guid(),
+		fields: [...Array(5)].map(
+			() => ({
+				id: chance.guid(),
+				title: chance.sentence(),
+				inputType: chance.pickone(['short-form', 'long-form'])
+			})
+		)
 	},
 ]
 
@@ -82,6 +88,13 @@ const PASS_APPS: IGrantCreateRequest[] = [
 			network: 'ETH'
 		},
 		ownerId: chance.guid(),
+		fields: [...Array(5)].map(
+			() => ({
+				id: chance.guid(),
+				title: chance.sentence(),
+				inputType: chance.pickone(['short-form', 'long-form'])
+			})
+		)
 	},
 	{
 		title: chance.sentence(),
@@ -91,6 +104,13 @@ const PASS_APPS: IGrantCreateRequest[] = [
 			value: 1.1,
 			network: 'ETH'
 		},
-		ownerId: chance.guid()
+		ownerId: chance.guid(),
+		fields: [...Array(1)].map(
+			() => ({
+				id: chance.guid(),
+				title: chance.sentence(),
+				inputType: chance.pickone(['short-form', 'long-form'])
+			})
+		)
 	},
 ]
