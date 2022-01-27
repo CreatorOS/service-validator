@@ -1,4 +1,5 @@
 import { components } from './gen'
 
-export type IGrantApplication = components['schemas']['GrantApplication']
-export type IFullGrant = IGrantApplication & { createdAt: Date | string }
+export type IGrantCreateRequest = components['schemas']['GrantCreateRequest']
+export type IWorkspaceCreateRequest = components['schemas']['WorkspaceCreateRequest']
+export type IGrantApplicationRequest = components['schemas']['GrantApplicationRequest']

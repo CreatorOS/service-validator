@@ -4,8 +4,14 @@
  */
 
 export interface paths {
-  "/validate": {
-    post: operations["validate"];
+  "/validate/grant-create": {
+    post: operations["validateGrantCreate"];
+  };
+  "/validate/workspace-create": {
+    post: operations["validateWorkspaceCreate"];
+  };
+  "/validate/grant-application": {
+    post: operations["validateGrantApplication"];
   };
 }
 
@@ -20,18 +26,61 @@ export interface components {
       /** @description Some extra information about the error */
       data?: { [key: string]: unknown };
     };
-    GrantReleaseType: "single" | "milestone";
-    GrantApplication: {
+    /**
+     * @description ID of the network
+     * @example 0x95b58a6bff3d14b7db2f5cb5f0ad413dc2940658
+     */
+    SupportedNetwork: string;
+    GrantField: {
+      id: string;
+      /** @description Human readable title of the field */
       title: string;
-      description: string;
+      inputType: "short-form" | "long-form" | "numeric";
+      /** @description Constraint possible inputs for this field */
+      enum?: string[];
+    };
+    GrantFieldAnswer: {
+      id: string;
+      value: string;
+    }[];
+    GrantProposedMilestone: {
+      title: string;
+      amount: number;
+    };
+    GrantApplicationRequest: {
+      grantId: string;
+      applicantId: components["schemas"]["OwnerID"];
+      details: string;
+      fields: components["schemas"]["GrantFieldAnswer"][];
+      members: {
+        details: string;
+      }[];
+      milestones?: components["schemas"]["GrantProposedMilestone"][];
+    };
+    WorkspaceCreateRequest: {
+      title: string;
+      about: string;
+      /** @description IPFS hash of the logo of the workspace */
+      logoIpfsHash: string;
+      creatorId: components["schemas"]["OwnerID"];
+      supportedNetworks: components["schemas"]["SupportedNetwork"][];
+    };
+    GrantCreateRequest: {
+      title: string;
+      summary: string;
+      details: string;
+      /**
+       * Format: date-time
+       * @description Deadline of the application
+       */
+      deadline?: Date | string;
       amount: {
         /** @example 10.5 */
         value: number;
-        /** @example ETH */
-        token: string;
+        network: components["schemas"]["SupportedNetwork"];
       };
-      releaseType: components["schemas"]["GrantReleaseType"];
       ownerId: components["schemas"]["OwnerID"];
+      fields?: components["schemas"]["GrantField"][];
     };
     /** @example 0x71C7656EC7ab88b098defB751B7411C5f6d8976F */
     OwnerID: string;
@@ -41,10 +90,13 @@ export interface components {
     ValidationSuccessResponse: {
       content: {
         "application/json": {
-          /** @example QmXoypizjW3WknFiJnKLwHCnL72vedxjQkDDP1mXWo6uco */
+          /**
+           * @description IPFS hash of the uploaded grant
+           * @example QmXoypizjW3WknFiJnKLwHCnL72vedxjQkDDP1mXWo6uco
+           */
           ipfsHash: string;
           /**
-           * Format: uri
+           * @description http url that can be used to fetch the uploaded grant file
            * @example https://ipfs.io/ipfs/QmXoypizjW3WknFiJnKLwHCnL72vedxjQkDDP1mXWo6uco
            */
           url: string;
@@ -61,7 +113,7 @@ export interface components {
 }
 
 export interface operations {
-  validate: {
+  validateGrantCreate: {
     responses: {
       200: components["responses"]["ValidationSuccessResponse"];
       400: components["responses"]["ErrorResponse"];
@@ -69,7 +121,31 @@ export interface operations {
     };
     requestBody: {
       content: {
-        "application/json": components["schemas"]["GrantApplication"];
+        "application/json": components["schemas"]["GrantCreateRequest"];
+      };
+    };
+  };
+  validateWorkspaceCreate: {
+    responses: {
+      200: components["responses"]["ValidationSuccessResponse"];
+      400: components["responses"]["ErrorResponse"];
+      500: components["responses"]["ErrorResponse"];
+    };
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["WorkspaceCreateRequest"];
+      };
+    };
+  };
+  validateGrantApplication: {
+    responses: {
+      200: components["responses"]["ValidationSuccessResponse"];
+      400: components["responses"]["ErrorResponse"];
+      500: components["responses"]["ErrorResponse"];
+    };
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["GrantApplicationRequest"];
       };
     };
   };

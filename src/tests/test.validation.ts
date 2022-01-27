@@ -1,6 +1,6 @@
 import { Chance } from 'chance'
 import request from 'supertest'
-import { IGrantApplication } from '../types'
+import { IGrantCreateRequest } from '../types'
 import { Response } from '../utils/make-api'
 import { describeWithApp } from './test-setup'
 
@@ -9,11 +9,11 @@ describeWithApp('Validation Tests', app => {
 	it('should validate & upload a grant correctly', async() => {
 		for(const appl of PASS_APPS) {
 			await request(app)
-				.post('/validate')
+				.post('/validate/grant-create')
 				.send(appl)
 				.expect(200)
 				.then(
-					({ body }: { body: Response<'validate'> }) => {
+					({ body }: { body: Response<'validateGrantCreate'> }) => {
 						expect(body.ipfsHash).toBeTruthy()
 						expect(body.url).toMatch(/https:/)
 					}
@@ -24,7 +24,7 @@ describeWithApp('Validation Tests', app => {
 	it('should fail to upload a grant', async() => {
 		for(const appl of FAIL_APPS) {
 			await request(app)
-				.post('/validate')
+				.post('/validate/grant-create')
 				.send(appl)
 				.expect(400)
 		}
@@ -43,7 +43,7 @@ const FAIL_APPS = [
 		description: chance.paragraph(),
 		amount: {
 			value: 100,
-			token: 'ETH'
+			network: 'ETH'
 		},
 		releaseType: 'single',
 		ownerId: chance.guid(),
@@ -54,7 +54,7 @@ const FAIL_APPS = [
 		description: chance.paragraph(),
 		amount: {
 			value: 100,
-			token: 'ETH',
+			network: 'ETH',
 			mal_prop: '1232'
 		},
 		releaseType: 'single',
@@ -72,25 +72,25 @@ const FAIL_APPS = [
 	},
 ]
 
-const PASS_APPS: IGrantApplication[] = [
+const PASS_APPS: IGrantCreateRequest[] = [
 	{
 		title: chance.sentence(),
-		description: chance.paragraph(),
+		summary: chance.paragraph(),
+		details: chance.paragraph(),
 		amount: {
 			value: 100,
-			token: 'ETH'
+			network: 'ETH'
 		},
-		releaseType: 'single',
 		ownerId: chance.guid(),
 	},
 	{
 		title: chance.sentence(),
-		description: chance.paragraph(),
+		summary: chance.paragraph(),
+		details: chance.paragraph(),
 		amount: {
 			value: 1.1,
-			token: 'ETH'
+			network: 'ETH'
 		},
-		releaseType: 'single',
 		ownerId: chance.guid()
 	},
 ]

@@ -1,17 +1,17 @@
 openapi: 3.0.1
 info:
-  title: QuestBook Grant Validator
+  title: QuestBook Data Validator
   version: 0.1.0
-  description: Validates the data for a grant, uploads & pins it to IPFS
+  description: Validates data, uploads & pins it to IPFS
 servers:
   - url: http://localhost:3001
     description: Local server
   - url: https://api-grant-validator.questbook.app
     description: Production server
 paths:
-  /validate:
+  /validate/grant-create:
     post:
-      operationId: validate
+      operationId: validateGrantCreate
       summary: Validate, upload & pin grant to IPFS
       tags:
         - Validation
@@ -19,7 +19,43 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/GrantApplication'
+              $ref: '#/components/schemas/GrantCreateRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/ValidationSuccessResponse'
+        '400':
+          $ref: '#/components/responses/ErrorResponse'
+        '500':
+          $ref: '#/components/responses/ErrorResponse'
+  /validate/workspace-create:
+    post:
+      operationId: validateWorkspaceCreate
+      summary: Validate, upload & pin workspace data to IPFS
+      tags:
+        - Validation
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WorkspaceCreateRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/ValidationSuccessResponse'
+        '400':
+          $ref: '#/components/responses/ErrorResponse'
+        '500':
+          $ref: '#/components/responses/ErrorResponse'
+  /validate/grant-application:
+    post:
+      operationId: validateGrantApplication
+      summary: Validate, upload & pin grant application data to IPFS
+      tags:
+        - Validation
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GrantApplicationRequest'
       responses:
         '200':
           $ref: '#/components/responses/ValidationSuccessResponse'
@@ -49,46 +85,167 @@ components:
         data:
           type: object
           description: Some extra information about the error
-    GrantReleaseType:
+    SupportedNetwork:
       type: string
-      enum:
-        - single
-        - milestone
-    GrantApplication:
+      description: ID of the network
+      example: '0x95b58a6bff3d14b7db2f5cb5f0ad413dc2940658'
+    GrantField:
+      type: object
+      additionalProperties: false
+      required:
+        - id
+        - title
+        - inputType
+      properties:
+        id:
+          type: string
+          maximum: 255
+        title:
+          description: Human readable title of the field
+          type: string
+        inputType:
+          enum:
+            - short-form
+            - long-form
+            - numeric
+        enum:
+          description: Constraint possible inputs for this field
+          type: array
+          items:
+            type: string
+    GrantFieldAnswer:
+      type: array
+      items:
+        required:
+          - id
+          - value
+        properties:
+          id:
+            type: string
+            maximum: 255
+          value:
+            type: string
+    GrantProposedMilestone:
+      type: object
+      required:
+        - title
+        - amount
+      properties:
+        title:
+          type: string
+        amount:
+          type: number
+    GrantApplicationRequest:
+      type: object
+      additionalProperties: false
+      required:
+        - grantId
+        - applicantId
+        - details
+        - fields
+        - members
+      properties:
+        grantId:
+          type: string
+        applicantId:
+          $ref: "#/components/schemas/OwnerID"
+        details: 
+          type: string
+          maximum: 10000
+        fields:
+          type: array
+          maximum: 100
+          items:
+            $ref: "#/components/schemas/GrantFieldAnswer"
+        members:
+          type: array
+          maximum: 100
+          items:
+            type: object
+            additionalProperties: false
+            required:
+              - details
+            properties:
+              details:
+                type: string
+        milestones:
+          type: array
+          maximum: 100
+          items:
+            $ref: "#/components/schemas/GrantProposedMilestone"
+    WorkspaceCreateRequest:
       type: object
       additionalProperties: false
       required:
         - title
-        - description
+        - about
+        - logoIpfsHash
+        - creatorId
+        - supportedNetworks
+      properties:
+        title:
+          type: string
+          minimum: 5
+          maximum: 128
+        about:
+          type: string
+          minimum: 5
+          maximum: 4096
+        logoIpfsHash:
+          type: string
+          description: IPFS hash of the logo of the workspace
+        creatorId:
+          $ref: "#/components/schemas/OwnerID"
+        supportedNetworks:
+          type: array
+          maximum: 100
+          items:
+            $ref: "#/components/schemas/SupportedNetwork"
+    GrantCreateRequest:
+      type: object
+      additionalProperties: false
+      required:
+        - title
+        - summary
+        - details
         - amount
-        - releaseType
         - ownerId
       properties:
         title:
           type: string
           minimum: 5
           maximum: 255
-        description:
+        summary:
           type: string
           minimum: 5
+          maximum: 1024
+        details:
+          type: string
+          minimum: 50
+        deadline:
+          type: string
+          format: date-time
+          description: Deadline of the application
         amount:
           type: object
           additionalProperties: false
           required:
             - value
-            - token
+            - network
           properties:
             value:
               type: number
               minimum: 0.001
               example: 10.5
-            token:
-              type: string
-              example: ETH
-        releaseType:
-          $ref: "#/components/schemas/GrantReleaseType"
+            network:
+              $ref: "#/components/schemas/SupportedNetwork"
         ownerId:
           $ref: "#/components/schemas/OwnerID"
+        fields:
+          type: array
+          maximum: 100
+          items:
+            $ref: "#/components/schemas/GrantField"
     OwnerID:
       type: string
       minimum: 16
