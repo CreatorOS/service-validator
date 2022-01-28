@@ -10,6 +10,9 @@ export interface paths {
   "/validate/workspace-create": {
     post: operations["validateWorkspaceCreate"];
   };
+  "/validate/workspace-update": {
+    post: operations["validateWorkspaceUpdate"];
+  };
   "/validate/grant-application": {
     post: operations["validateGrantApplication"];
   };
@@ -57,13 +60,29 @@ export interface components {
       }[];
       milestones?: components["schemas"]["GrantProposedMilestone"][];
     };
+    SocialItem: {
+      name: string;
+      value: string;
+    };
     WorkspaceCreateRequest: {
       title: string;
       about: string;
       /** @description IPFS hash of the logo of the workspace */
       logoIpfsHash: string;
+      /** @description IPFS hash of the cover of the workspace */
+      coverImageIpfsHash?: string;
       creatorId: components["schemas"]["OwnerID"];
       supportedNetworks: components["schemas"]["SupportedNetwork"][];
+      socials: components["schemas"]["SocialItem"][];
+    };
+    WorkspaceUpdateRequest: {
+      title?: string;
+      about?: string;
+      /** @description IPFS hash of the logo of the workspace */
+      logoIpfsHash?: string;
+      /** @description IPFS hash of the cover of the workspace */
+      coverImageIpfsHash?: string;
+      socials?: components["schemas"]["SocialItem"][];
     };
     GrantCreateRequest: {
       title: string;
@@ -136,6 +155,18 @@ export interface operations {
     requestBody: {
       content: {
         "application/json": components["schemas"]["WorkspaceCreateRequest"];
+      };
+    };
+  };
+  validateWorkspaceUpdate: {
+    responses: {
+      200: components["responses"]["ValidationSuccessResponse"];
+      400: components["responses"]["ErrorResponse"];
+      500: components["responses"]["ErrorResponse"];
+    };
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["WorkspaceUpdateRequest"];
       };
     };
   };

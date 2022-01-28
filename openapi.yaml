@@ -45,6 +45,24 @@ paths:
           $ref: '#/components/responses/ErrorResponse'
         '500':
           $ref: '#/components/responses/ErrorResponse'
+  /validate/workspace-update:
+    post:
+      operationId: validateWorkspaceUpdate
+      summary: Validate, upload & pin workspace patch data to IPFS
+      tags:
+        - Validation
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WorkspaceUpdateRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/ValidationSuccessResponse'
+        '400':
+          $ref: '#/components/responses/ErrorResponse'
+        '500':
+          $ref: '#/components/responses/ErrorResponse'
   /validate/grant-application:
     post:
       operationId: validateGrantApplication
@@ -173,6 +191,19 @@ components:
           maximum: 100
           items:
             $ref: "#/components/schemas/GrantProposedMilestone"
+    SocialItem:
+      type: object
+      additionalProperties: false
+      required:
+        - name
+        - value
+      properties:
+        name:
+          type: string
+          maximum: 64
+        value:
+          type: string
+          maximum: 255
     WorkspaceCreateRequest:
       type: object
       additionalProperties: false
@@ -182,6 +213,7 @@ components:
         - logoIpfsHash
         - creatorId
         - supportedNetworks
+        - socials
       properties:
         title:
           type: string
@@ -194,6 +226,9 @@ components:
         logoIpfsHash:
           type: string
           description: IPFS hash of the logo of the workspace
+        coverImageIpfsHash:
+          type: string
+          description: IPFS hash of the cover of the workspace
         creatorId:
           $ref: "#/components/schemas/OwnerID"
         supportedNetworks:
@@ -201,6 +236,34 @@ components:
           maximum: 100
           items:
             $ref: "#/components/schemas/SupportedNetwork"
+        socials:
+          type: array
+          items:
+            $ref: "#/components/schemas/SocialItem"
+          maximum: 10
+    WorkspaceUpdateRequest:
+      type: object
+      additionalProperties: false
+      properties:
+        title:
+          type: string
+          minimum: 5
+          maximum: 128
+        about:
+          type: string
+          minimum: 5
+          maximum: 4096
+        logoIpfsHash:
+          type: string
+          description: IPFS hash of the logo of the workspace
+        coverImageIpfsHash:
+          type: string
+          description: IPFS hash of the cover of the workspace
+        socials:
+          type: array
+          items:
+            $ref: "#/components/schemas/SocialItem"
+          maximum: 10
     GrantCreateRequest:
       type: object
       additionalProperties: false
