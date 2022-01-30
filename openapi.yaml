@@ -27,6 +27,24 @@ paths:
           $ref: '#/components/responses/ErrorResponse'
         '500':
           $ref: '#/components/responses/ErrorResponse'
+  /validate/grant-update:
+    post:
+      operationId: validateGrantUpdate
+      summary: Validate & update grant to IPFS
+      tags:
+        - Validation
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GrantUpdateRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/ValidationSuccessResponse'
+        '400':
+          $ref: '#/components/responses/ErrorResponse'
+        '500':
+          $ref: '#/components/responses/ErrorResponse'
   /validate/workspace-create:
     post:
       operationId: validateWorkspaceCreate
@@ -132,17 +150,17 @@ components:
           items:
             type: string
     GrantFieldAnswer:
-      type: array
-      items:
-        required:
-          - id
-          - value
-        properties:
-          id:
-            type: string
-            maximum: 255
-          value:
-            type: string
+      type: object
+      additionalProperties: false
+      required:
+        - id
+        - value
+      properties:
+        id:
+          type: string
+          maximum: 255
+        value:
+          type: string
     GrantProposedMilestone:
       type: object
       required:
@@ -271,7 +289,7 @@ components:
         - title
         - summary
         - details
-        - amount
+        - reward
         - creatorId
         - workspaceId
         - fields
@@ -291,24 +309,41 @@ components:
           type: string
           format: date-time
           description: Deadline of the application
-        amount:
+        reward:
           type: object
           additionalProperties: false
           required:
-            - value
-            - network
+            - asset
+            - committed
           properties:
-            value:
+            committed:
               type: number
               minimum: 0.001
               example: 10.5
-            network:
+            asset:
               $ref: "#/components/schemas/SupportedNetwork"
         creatorId:
           $ref: "#/components/schemas/OwnerID"
         workspaceId:
           type: string
           description: the workspace the grant is from
+        fields:
+          type: array
+          minimum: 1
+          maximum: 100
+          items:
+            $ref: "#/components/schemas/GrantField"
+    GrantUpdateRequest:
+      type: object
+      additionalProperties: false
+      properties:
+        details:
+          type: string
+          minimum: 50
+        deadline:
+          type: string
+          format: date-time
+          description: Deadline of the application
         fields:
           type: array
           minimum: 1

@@ -7,6 +7,9 @@ export interface paths {
   "/validate/grant-create": {
     post: operations["validateGrantCreate"];
   };
+  "/validate/grant-update": {
+    post: operations["validateGrantUpdate"];
+  };
   "/validate/workspace-create": {
     post: operations["validateWorkspaceCreate"];
   };
@@ -45,7 +48,7 @@ export interface components {
     GrantFieldAnswer: {
       id: string;
       value: string;
-    }[];
+    };
     GrantProposedMilestone: {
       title: string;
       amount: number;
@@ -93,15 +96,24 @@ export interface components {
        * @description Deadline of the application
        */
       deadline?: Date | string;
-      amount: {
+      reward: {
         /** @example 10.5 */
-        value: number;
-        network: components["schemas"]["SupportedNetwork"];
+        committed: number;
+        asset: components["schemas"]["SupportedNetwork"];
       };
       creatorId: components["schemas"]["OwnerID"];
       /** @description the workspace the grant is from */
       workspaceId: string;
       fields: components["schemas"]["GrantField"][];
+    };
+    GrantUpdateRequest: {
+      details?: string;
+      /**
+       * Format: date-time
+       * @description Deadline of the application
+       */
+      deadline?: Date | string;
+      fields?: components["schemas"]["GrantField"][];
     };
     /** @example 0x71C7656EC7ab88b098defB751B7411C5f6d8976F */
     OwnerID: string;
@@ -143,6 +155,18 @@ export interface operations {
     requestBody: {
       content: {
         "application/json": components["schemas"]["GrantCreateRequest"];
+      };
+    };
+  };
+  validateGrantUpdate: {
+    responses: {
+      200: components["responses"]["ValidationSuccessResponse"];
+      400: components["responses"]["ErrorResponse"];
+      500: components["responses"]["ErrorResponse"];
+    };
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["GrantUpdateRequest"];
       };
     };
   };
