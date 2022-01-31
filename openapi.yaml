@@ -81,9 +81,9 @@ paths:
           $ref: '#/components/responses/ErrorResponse'
         '500':
           $ref: '#/components/responses/ErrorResponse'
-  /validate/grant-application:
+  /validate/grant-application-create:
     post:
-      operationId: validateGrantApplication
+      operationId: validateGrantApplicationCreate
       summary: Validate, upload & pin grant application data to IPFS
       tags:
         - Validation
@@ -92,6 +92,24 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/GrantApplicationRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/ValidationSuccessResponse'
+        '400':
+          $ref: '#/components/responses/ErrorResponse'
+        '500':
+          $ref: '#/components/responses/ErrorResponse'
+  /validate/grant-application-update:
+    post:
+      operationId: validateGrantApplicationUpdate
+      summary: Validate, upload & pin grant application data to IPFS
+      tags:
+        - Validation
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GrantApplicationUpdate'
       responses:
         '200':
           $ref: '#/components/responses/ValidationSuccessResponse'
@@ -209,6 +227,14 @@ components:
           maximum: 100
           items:
             $ref: "#/components/schemas/GrantProposedMilestone"
+    GrantApplicationUpdate:
+      type: object
+      additionalProperties: false
+      required:
+        - details
+      properties:
+        details:
+          type: string
     SocialItem:
       type: object
       additionalProperties: false

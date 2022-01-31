@@ -16,8 +16,11 @@ export interface paths {
   "/validate/workspace-update": {
     post: operations["validateWorkspaceUpdate"];
   };
-  "/validate/grant-application": {
-    post: operations["validateGrantApplication"];
+  "/validate/grant-application-create": {
+    post: operations["validateGrantApplicationCreate"];
+  };
+  "/validate/grant-application-update": {
+    post: operations["validateGrantApplicationUpdate"];
   };
 }
 
@@ -62,6 +65,9 @@ export interface components {
         details: string;
       }[];
       milestones?: components["schemas"]["GrantProposedMilestone"][];
+    };
+    GrantApplicationUpdate: {
+      details: string;
     };
     SocialItem: {
       name: string;
@@ -194,7 +200,7 @@ export interface operations {
       };
     };
   };
-  validateGrantApplication: {
+  validateGrantApplicationCreate: {
     responses: {
       200: components["responses"]["ValidationSuccessResponse"];
       400: components["responses"]["ErrorResponse"];
@@ -203,6 +209,18 @@ export interface operations {
     requestBody: {
       content: {
         "application/json": components["schemas"]["GrantApplicationRequest"];
+      };
+    };
+  };
+  validateGrantApplicationUpdate: {
+    responses: {
+      200: components["responses"]["ValidationSuccessResponse"];
+      400: components["responses"]["ErrorResponse"];
+      500: components["responses"]["ErrorResponse"];
+    };
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["GrantApplicationUpdate"];
       };
     };
   };

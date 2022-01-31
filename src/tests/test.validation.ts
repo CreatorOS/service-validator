@@ -43,7 +43,7 @@ describeWithApp('Validation Tests', app => {
 				.send(appl)
 				.expect(200)
 				.then(
-					({ body }: { body: Response<'validateGrantApplication'> }) => {
+					({ body }: { body: Response<'validateGrantApplicationCreate'> }) => {
 						expect(body.ipfsHash).toBeTruthy()
 						expect(body.url).toMatch(/https:/)
 					}
