@@ -67,7 +67,8 @@ export interface components {
       milestones?: components["schemas"]["GrantProposedMilestone"][];
     };
     GrantApplicationUpdate: {
-      details: string;
+      details?: string;
+      milestones?: components["schemas"]["GrantProposedMilestone"][];
     };
     SocialItem: {
       name: string;

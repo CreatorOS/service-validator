@@ -230,11 +230,14 @@ components:
     GrantApplicationUpdate:
       type: object
       additionalProperties: false
-      required:
-        - details
       properties:
         details:
           type: string
+        milestones:
+          type: array
+          maximum: 100
+          items:
+            $ref: "#/components/schemas/GrantProposedMilestone"
     SocialItem:
       type: object
       additionalProperties: false

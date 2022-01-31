@@ -39,7 +39,7 @@ describeWithApp('Validation Tests', app => {
 	it('should validate & upload an application correctly', async() => {
 		for(const appl of PASS_GRANT_APPLICATIONS) {
 			await request(app)
-				.post('/validate/grant-application')
+				.post('/validate/grant-application-create')
 				.send(appl)
 				.expect(200)
 				.then(
