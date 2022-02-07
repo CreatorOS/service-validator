@@ -32,9 +32,9 @@ jobs:
           
       - name: Clone the existing package
         run: |
-          git config --global user.email "ci@creatoros.com"
+          git config --global user.email "ci@questbook.com"
           git config --global user.name "CI Bot"
-          git clone https://github.com/creatoros/service-validator-typescript-client /tmp/generated
+          git clone https://github.com/questbook/service-validator-typescript-client /tmp/generated
       
       - name: Remove existing files
         run: |
