@@ -4,10 +4,10 @@ info:
   version: 0.1.0
   description: Validates data, uploads & pins it to IPFS
 servers:
-  - url: http://localhost:3001
-    description: Local server
   - url: https://api-grant-validator.questbook.app
     description: Production server
+  - url: http://localhost:3001
+    description: Local server
 paths:
   /validate/grant-create:
     post:
