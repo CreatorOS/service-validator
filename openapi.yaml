@@ -139,10 +139,17 @@ components:
         data:
           type: object
           description: Some extra information about the error
+    Asset:
+      type: string
+      example: '0x95b58a6bff3d14b7db2f5cb5f0ad413dc2940658'
     SupportedNetwork:
       type: string
-      description: ID of the network
-      example: '0x95b58a6bff3d14b7db2f5cb5f0ad413dc2940658'
+      description: Chain ID of the network
+      enum:
+        - '1' # ETH mainnet
+        - '4' # Rinkeby testnet
+        - '137' # Polygon
+        - '80001' # Polygon testnet
     GrantField:
       type: object
       additionalProperties: false
@@ -362,7 +369,7 @@ components:
               minimum: 0.001
               example: 10.5
             asset:
-              $ref: "#/components/schemas/SupportedNetwork"
+              $ref: "#/components/schemas/Asset"
         creatorId:
           $ref: "#/components/schemas/OwnerID"
         workspaceId:

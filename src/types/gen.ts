@@ -35,11 +35,10 @@ export interface components {
       /** @description Some extra information about the error */
       data?: { [key: string]: unknown };
     };
-    /**
-     * @description ID of the network
-     * @example 0x95b58a6bff3d14b7db2f5cb5f0ad413dc2940658
-     */
-    SupportedNetwork: string;
+    /** @example 0x95b58a6bff3d14b7db2f5cb5f0ad413dc2940658 */
+    Asset: string;
+    /** @description Chain ID of the network */
+    SupportedNetwork: "1" | "4" | "137" | "80001";
     GrantField: {
       id: string;
       /** @description Human readable title of the field */
@@ -110,7 +109,7 @@ export interface components {
       reward: {
         /** @example 10.5 */
         committed: number;
-        asset: components["schemas"]["SupportedNetwork"];
+        asset: components["schemas"]["Asset"];
       };
       creatorId: components["schemas"]["OwnerID"];
       /** @description the workspace the grant is from */
