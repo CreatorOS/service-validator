@@ -48,19 +48,22 @@ export interface components {
       /** @description Constraint possible inputs for this field */
       enum?: string[];
     };
-    GrantFieldAnswer: {
-      id: string;
-      value: string;
-    };
     GrantProposedMilestone: {
       title: string;
       amount: number;
     };
+    /** @description Maps ID of the field to the answer by the applicant */
+    GrantApplicationFieldAnswers: {
+      applicantName: string;
+      applicantEmail: string;
+      projectName: string;
+      projectDetails: string;
+      fundingBreakdown: string;
+    } & { [key: string]: string };
     GrantApplicationRequest: {
       grantId: string;
       applicantId: components["schemas"]["OwnerID"];
-      details: string;
-      fields: components["schemas"]["GrantFieldAnswer"][];
+      fields: components["schemas"]["GrantApplicationFieldAnswers"];
       members: {
         details: string;
       }[];

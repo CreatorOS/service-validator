@@ -167,18 +167,6 @@ components:
           type: array
           items:
             type: string
-    GrantFieldAnswer:
-      type: object
-      additionalProperties: false
-      required:
-        - id
-        - value
-      properties:
-        id:
-          type: string
-          maximum: 255
-        value:
-          type: string
     GrantProposedMilestone:
       type: object
       required:
@@ -189,13 +177,40 @@ components:
           type: string
         amount:
           type: number
+    GrantApplicationFieldAnswers:
+      type: object
+      description: Maps ID of the field to the answer by the applicant
+      additionalProperties:
+        type: string
+        maximum: 10000
+      required:
+        - applicantName
+        - applicantEmail
+        - projectName
+        - projectDetails
+        - fundingBreakdown
+      properties:
+        applicantName:
+          type: string
+          maximum: 10000
+        applicantEmail:
+          type: string
+          maximum: 10000
+        projectName:
+          type: string
+          maximum: 10000
+        projectDetails:
+          type: string
+          maximum: 10000
+        fundingBreakdown:
+          type: string
+          maximum: 10000
     GrantApplicationRequest:
       type: object
       additionalProperties: false
       required:
         - grantId
         - applicantId
-        - details
         - fields
         - members
       properties:
@@ -203,14 +218,8 @@ components:
           type: string
         applicantId:
           $ref: "#/components/schemas/OwnerID"
-        details: 
-          type: string
-          maximum: 10000
         fields:
-          type: array
-          maximum: 100
-          items:
-            $ref: "#/components/schemas/GrantFieldAnswer"
+          $ref: "#/components/schemas/GrantApplicationFieldAnswers"
         members:
           type: array
           maximum: 100

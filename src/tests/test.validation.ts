@@ -183,13 +183,19 @@ const PASS_GRANT_APPLICATIONS: IGrantApplicationRequest[] = [
 	{
 		grantId: chance.guid(),
 		applicantId: chance.guid(),
-		details: chance.paragraph(),
-		fields: [...Array(4)].map(
-			(_, i) => ({
-				id: i.toString(),
-				value: chance.sentence()
-			})
-		),
+		fields: {
+			applicantName: chance.name(),
+			applicantEmail: chance.email(),
+			projectName: chance.name(),
+			projectDetails: chance.paragraph(),
+			fundingBreakdown: chance.paragraph(),
+			...[...Array(4)].reduce(
+				(dict, _, i) => ({
+					...dict,
+					[i.toString()]: chance.sentence()
+				}), { }
+			)
+		},
 		members: [...Array(3)].map(
 			() => ({
 				details: chance.paragraph()
