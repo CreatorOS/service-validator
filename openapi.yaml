@@ -169,6 +169,7 @@ components:
             - short-form
             - long-form
             - numeric
+            - array
         enum:
           description: Constraint possible inputs for this field
           type: array
@@ -184,12 +185,24 @@ components:
           type: string
         amount:
           type: number
+    GrantApplicationFieldAnswer:
+      type: array
+      items:
+        type: string
+        maximum: 10000
+      maximum: 100
+    RequiredGrantApplicationFieldAnswer:
+      type: array
+      items:
+        type: string
+        maximum: 10000
+      maximum: 100
+      minimum: 1
     GrantApplicationFieldAnswers:
       type: object
       description: Maps ID of the field to the answer by the applicant
       additionalProperties:
-        type: string
-        maximum: 10000
+        $ref: '#/components/schemas/GrantApplicationFieldAnswer'
       required:
         - applicantName
         - applicantEmail
@@ -198,20 +211,15 @@ components:
         - fundingBreakdown
       properties:
         applicantName:
-          type: string
-          maximum: 10000
+          $ref: '#/components/schemas/RequiredGrantApplicationFieldAnswer'
         applicantEmail:
-          type: string
-          maximum: 10000
+          $ref: '#/components/schemas/RequiredGrantApplicationFieldAnswer'
         projectName:
-          type: string
-          maximum: 10000
+          $ref: '#/components/schemas/RequiredGrantApplicationFieldAnswer'
         projectDetails:
-          type: string
-          maximum: 10000
+          $ref: '#/components/schemas/RequiredGrantApplicationFieldAnswer'
         fundingBreakdown:
-          type: string
-          maximum: 10000
+          $ref: '#/components/schemas/RequiredGrantApplicationFieldAnswer'
     GrantApplicationRequest:
       type: object
       additionalProperties: false
@@ -219,7 +227,6 @@ components:
         - grantId
         - applicantId
         - fields
-        - members
       properties:
         grantId:
           type: string
@@ -227,17 +234,6 @@ components:
           $ref: "#/components/schemas/OwnerID"
         fields:
           $ref: "#/components/schemas/GrantApplicationFieldAnswers"
-        members:
-          type: array
-          maximum: 100
-          items:
-            type: object
-            additionalProperties: false
-            required:
-              - details
-            properties:
-              details:
-                type: string
         milestones:
           type: array
           maximum: 100

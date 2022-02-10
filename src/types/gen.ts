@@ -43,7 +43,7 @@ export interface components {
       id: string;
       /** @description Human readable title of the field */
       title: string;
-      inputType: "short-form" | "long-form" | "numeric";
+      inputType: "short-form" | "long-form" | "numeric" | "array";
       /** @description Constraint possible inputs for this field */
       enum?: string[];
     };
@@ -51,21 +51,20 @@ export interface components {
       title: string;
       amount: number;
     };
+    GrantApplicationFieldAnswer: string[];
+    RequiredGrantApplicationFieldAnswer: string[];
     /** @description Maps ID of the field to the answer by the applicant */
     GrantApplicationFieldAnswers: {
-      applicantName: string;
-      applicantEmail: string;
-      projectName: string;
-      projectDetails: string;
-      fundingBreakdown: string;
-    } & { [key: string]: string };
+      applicantName: components["schemas"]["RequiredGrantApplicationFieldAnswer"];
+      applicantEmail: components["schemas"]["RequiredGrantApplicationFieldAnswer"];
+      projectName: components["schemas"]["RequiredGrantApplicationFieldAnswer"];
+      projectDetails: components["schemas"]["RequiredGrantApplicationFieldAnswer"];
+      fundingBreakdown: components["schemas"]["RequiredGrantApplicationFieldAnswer"];
+    } & { [key: string]: components["schemas"]["GrantApplicationFieldAnswer"] };
     GrantApplicationRequest: {
       grantId: string;
       applicantId: components["schemas"]["OwnerID"];
       fields: components["schemas"]["GrantApplicationFieldAnswers"];
-      members: {
-        details: string;
-      }[];
       milestones?: components["schemas"]["GrantProposedMilestone"][];
     };
     GrantApplicationUpdate: {
