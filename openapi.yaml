@@ -142,6 +142,10 @@ components:
     Asset:
       type: string
       example: '0x95b58a6bff3d14b7db2f5cb5f0ad413dc2940658'
+    Amount:
+      type: string
+      pattern: '^[0-9]{1,30}$'
+      description: Positive integer amount of currency. Is a string to allow bigint inputs
     SupportedNetwork:
       type: string
       description: Chain ID of the network
@@ -184,7 +188,7 @@ components:
         title:
           type: string
         amount:
-          type: number
+          $ref: '#/components/schemas/Amount'
     GrantApplicationFieldAnswer:
       type: array
       items:
@@ -361,9 +365,7 @@ components:
             - committed
           properties:
             committed:
-              type: number
-              minimum: 0.001
-              example: 10.5
+               $ref: "#/components/schemas/Amount"
             asset:
               $ref: "#/components/schemas/Asset"
         creatorId:

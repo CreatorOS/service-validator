@@ -122,6 +122,24 @@ const FAIL_APPS = [
 			})
 		)
 	},
+	{
+		title: chance.sentence(),
+		summary: chance.paragraph(),
+		details: chance.paragraph(),
+		reward: {
+			committed: '100.4',
+			asset: '0xA0A1'
+		},
+		creatorId: chance.guid(),
+		workspaceId: chance.guid(),
+		fields: [...Array(5)].map(
+			() => ({
+				id: chance.guid(),
+				title: chance.sentence(),
+				inputType: chance.pickone(['short-form', 'long-form'])
+			})
+		)
+	},
 ]
 
 const PASS_GRANTS: IGrantCreateRequest[] = [
@@ -130,7 +148,7 @@ const PASS_GRANTS: IGrantCreateRequest[] = [
 		summary: chance.paragraph(),
 		details: chance.paragraph(),
 		reward: {
-			committed: 100,
+			committed: '100',
 			asset: '0xA0A1'
 		},
 		creatorId: chance.guid(),
@@ -148,7 +166,7 @@ const PASS_GRANTS: IGrantCreateRequest[] = [
 		summary: chance.paragraph(),
 		details: chance.paragraph(),
 		reward: {
-			committed: 1.1,
+			committed: '11234',
 			asset: '0xA0A2'
 		},
 		creatorId: chance.guid(),
@@ -199,7 +217,7 @@ const PASS_GRANT_APPLICATIONS: IGrantApplicationRequest[] = [
 		milestones: [...Array(5)].map(
 			() => ({
 				title: chance.sentence(),
-				amount: chance.integer({ min: 1, max: 100 })
+				amount: chance.integer({ min: 1, max: 100 }).toString()
 			})
 		)
 	},

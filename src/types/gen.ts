@@ -37,6 +37,7 @@ export interface components {
     };
     /** @example 0x95b58a6bff3d14b7db2f5cb5f0ad413dc2940658 */
     Asset: string;
+    Amount: string;
     /** @description Chain ID of the network */
     SupportedNetwork: "1" | "4" | "137" | "80001";
     GrantField: {
@@ -49,7 +50,7 @@ export interface components {
     };
     GrantProposedMilestone: {
       title: string;
-      amount: number;
+      amount: components["schemas"]["Amount"];
     };
     GrantApplicationFieldAnswer: string[];
     RequiredGrantApplicationFieldAnswer: string[];
@@ -106,8 +107,7 @@ export interface components {
        */
       deadline?: Date | string;
       reward: {
-        /** @example 10.5 */
-        committed: number;
+        committed: components["schemas"]["Amount"];
         asset: components["schemas"]["Asset"];
       };
       creatorId: components["schemas"]["OwnerID"];
