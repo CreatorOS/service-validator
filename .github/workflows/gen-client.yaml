@@ -47,6 +47,10 @@ jobs:
         run: |
           openapi-generator-cli generate -g typescript-axios -o /tmp/generated -i ./openapi.yaml -c ./resources/openapi-client-config.json
       
+      - name: Post process package
+        run: |
+          PACKAGE_LOCATION=/tmp/generated node ./resources/post-process-client.js
+
       - name: Tag and push the generated source file
         run: |
           API_VERSION="$GITHUB_RUN_ID-$(echo -n $GITHUB_SHA | cut -c1-6)"
