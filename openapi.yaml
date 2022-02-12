@@ -158,13 +158,9 @@ components:
       type: object
       additionalProperties: false
       required:
-        - id
         - title
         - inputType
       properties:
-        id:
-          type: string
-          maximum: 255
         title:
           description: Human readable title of the field
           type: string
@@ -330,6 +326,27 @@ components:
           items:
             $ref: "#/components/schemas/SocialItem"
           maximum: 10
+    GrantFieldMap:
+      type: object
+      additionalProperties:
+        $ref: "#/components/schemas/GrantField"
+      required:
+        - applicantName
+        - applicantEmail
+        - projectName
+        - projectDetails
+        - fundingBreakdown
+      properties:
+        applicantName:
+          $ref: "#/components/schemas/GrantField"
+        applicantEmail:
+          $ref: "#/components/schemas/GrantField"
+        projectName:
+          $ref: "#/components/schemas/GrantField"
+        projectDetails:
+          $ref: "#/components/schemas/GrantField"
+        fundingBreakdown:
+          $ref: "#/components/schemas/GrantField"
     GrantCreateRequest:
       type: object
       additionalProperties: false
@@ -374,11 +391,7 @@ components:
           type: string
           description: the workspace the grant is from
         fields:
-          type: array
-          minimum: 1
-          maximum: 100
-          items:
-            $ref: "#/components/schemas/GrantField"
+          $ref: "#/components/schemas/GrantFieldMap"
     GrantUpdateRequest:
       type: object
       additionalProperties: false

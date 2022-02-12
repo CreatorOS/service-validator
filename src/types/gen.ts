@@ -37,11 +37,11 @@ export interface components {
     };
     /** @example 0x95b58a6bff3d14b7db2f5cb5f0ad413dc2940658 */
     Asset: string;
+    /** @description Positive integer amount of currency. Is a string to allow bigint inputs */
     Amount: string;
     /** @description Chain ID of the network */
     SupportedNetwork: "1" | "4" | "137" | "80001";
     GrantField: {
-      id: string;
       /** @description Human readable title of the field */
       title: string;
       inputType: "short-form" | "long-form" | "numeric" | "array";
@@ -97,6 +97,13 @@ export interface components {
       coverImageIpfsHash?: string;
       socials?: components["schemas"]["SocialItem"][];
     };
+    GrantFieldMap: {
+      applicantName: components["schemas"]["GrantField"];
+      applicantEmail: components["schemas"]["GrantField"];
+      projectName: components["schemas"]["GrantField"];
+      projectDetails: components["schemas"]["GrantField"];
+      fundingBreakdown: components["schemas"]["GrantField"];
+    } & { [key: string]: components["schemas"]["GrantField"] };
     GrantCreateRequest: {
       title: string;
       summary: string;
@@ -113,7 +120,7 @@ export interface components {
       creatorId: components["schemas"]["OwnerID"];
       /** @description the workspace the grant is from */
       workspaceId: string;
-      fields: components["schemas"]["GrantField"][];
+      fields: components["schemas"]["GrantFieldMap"];
     };
     GrantUpdateRequest: {
       details?: string;

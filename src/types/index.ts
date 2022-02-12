@@ -1,5 +1,6 @@
 import { components } from './gen'
 
+export type IGrantField = components['schemas']['GrantField']
 export type IGrantCreateRequest = components['schemas']['GrantCreateRequest']
 export type IGrantUpdateRequest = components['schemas']['GrantUpdateRequest']
 export type IWorkspaceCreateRequest = components['schemas']['WorkspaceCreateRequest']

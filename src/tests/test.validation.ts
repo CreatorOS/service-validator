@@ -1,6 +1,6 @@
 import { Chance } from 'chance'
 import request from 'supertest'
-import { IGrantApplicationRequest, IGrantCreateRequest, IWorkspaceCreateRequest, IWorkspaceUpdateRequest } from '../types'
+import { IGrantApplicationRequest, IGrantCreateRequest, IGrantField, IWorkspaceCreateRequest, IWorkspaceUpdateRequest } from '../types'
 import { Response } from '../utils/make-api'
 import { describeWithApp } from './test-setup'
 
@@ -142,6 +142,11 @@ const FAIL_APPS = [
 	},
 ]
 
+const makeGrantField = (): IGrantField => ({
+	title: chance.sentence(),
+	inputType: chance.pickone(['short-form', 'long-form'])
+})
+
 const PASS_GRANTS: IGrantCreateRequest[] = [
 	{
 		title: chance.sentence(),
@@ -153,13 +158,14 @@ const PASS_GRANTS: IGrantCreateRequest[] = [
 		},
 		creatorId: chance.guid(),
 		workspaceId: chance.guid(),
-		fields: [...Array(5)].map(
-			() => ({
-				id: chance.guid(),
-				title: chance.sentence(),
-				inputType: chance.pickone(['short-form', 'long-form'])
-			})
-		)
+		fields: {
+			applicantName: makeGrantField(),
+			applicantEmail: makeGrantField(),
+			projectName: makeGrantField(),
+			projectDetails: makeGrantField(),
+			fundingBreakdown: makeGrantField(),
+			[chance.guid()]: makeGrantField()
+		}
 	},
 	{
 		title: chance.sentence(),
@@ -171,13 +177,13 @@ const PASS_GRANTS: IGrantCreateRequest[] = [
 		},
 		creatorId: chance.guid(),
 		workspaceId: chance.guid(),
-		fields: [...Array(1)].map(
-			() => ({
-				id: chance.guid(),
-				title: chance.sentence(),
-				inputType: chance.pickone(['short-form', 'long-form'])
-			})
-		)
+		fields: {
+			applicantName: makeGrantField(),
+			applicantEmail: makeGrantField(),
+			projectName: makeGrantField(),
+			projectDetails: makeGrantField(),
+			fundingBreakdown: makeGrantField()
+		}
 	},
 ]
 
