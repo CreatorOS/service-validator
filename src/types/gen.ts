@@ -129,7 +129,7 @@ export interface components {
        * @description Deadline of the application
        */
       deadline?: Date | string;
-      fields?: components["schemas"]["GrantField"][];
+      fields?: components["schemas"]["GrantFieldMap"];
     };
     /** @example 0x71C7656EC7ab88b098defB751B7411C5f6d8976F */
     OwnerID: string;
