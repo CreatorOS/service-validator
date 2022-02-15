@@ -347,6 +347,17 @@ components:
           $ref: "#/components/schemas/GrantField"
         fundingBreakdown:
           $ref: "#/components/schemas/GrantField"
+    GrantReward:
+      type: object
+      additionalProperties: false
+      required:
+        - asset
+        - committed
+      properties:
+        committed:
+            $ref: "#/components/schemas/Amount"
+        asset:
+          $ref: "#/components/schemas/Asset"
     GrantCreateRequest:
       type: object
       additionalProperties: false
@@ -375,16 +386,7 @@ components:
           format: date-time
           description: Deadline of the application
         reward:
-          type: object
-          additionalProperties: false
-          required:
-            - asset
-            - committed
-          properties:
-            committed:
-               $ref: "#/components/schemas/Amount"
-            asset:
-              $ref: "#/components/schemas/Asset"
+          $ref: "#/components/schemas/GrantReward"
         creatorId:
           $ref: "#/components/schemas/OwnerID"
         workspaceId:
@@ -396,6 +398,14 @@ components:
       type: object
       additionalProperties: false
       properties:
+        title:
+          type: string
+          minimum: 5
+          maximum: 255
+        summary:
+          type: string
+          minimum: 5
+          maximum: 1024
         details:
           type: string
           minimum: 50
@@ -403,6 +413,8 @@ components:
           type: string
           format: date-time
           description: Deadline of the application
+        reward:
+          $ref: "#/components/schemas/GrantReward"
         fields:
           $ref: "#/components/schemas/GrantFieldMap"
     OwnerID:

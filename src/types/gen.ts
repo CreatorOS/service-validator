@@ -104,6 +104,10 @@ export interface components {
       projectDetails: components["schemas"]["GrantField"];
       fundingBreakdown: components["schemas"]["GrantField"];
     } & { [key: string]: components["schemas"]["GrantField"] };
+    GrantReward: {
+      committed: components["schemas"]["Amount"];
+      asset: components["schemas"]["Asset"];
+    };
     GrantCreateRequest: {
       title: string;
       summary: string;
@@ -113,22 +117,22 @@ export interface components {
        * @description Deadline of the application
        */
       deadline?: Date | string;
-      reward: {
-        committed: components["schemas"]["Amount"];
-        asset: components["schemas"]["Asset"];
-      };
+      reward: components["schemas"]["GrantReward"];
       creatorId: components["schemas"]["OwnerID"];
       /** @description the workspace the grant is from */
       workspaceId: string;
       fields: components["schemas"]["GrantFieldMap"];
     };
     GrantUpdateRequest: {
+      title?: string;
+      summary?: string;
       details?: string;
       /**
        * Format: date-time
        * @description Deadline of the application
        */
       deadline?: Date | string;
+      reward?: components["schemas"]["GrantReward"];
       fields?: components["schemas"]["GrantFieldMap"];
     };
     /** @example 0x71C7656EC7ab88b098defB751B7411C5f6d8976F */

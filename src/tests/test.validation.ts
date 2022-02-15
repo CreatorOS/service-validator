@@ -202,7 +202,6 @@ const PASS_WORKSPACES: IWorkspaceCreateRequest[] = [
 	},
 ]
 
-
 const PASS_GRANT_APPLICATIONS: IGrantApplicationRequest[] = [
 	{
 		grantId: chance.guid(),
@@ -228,7 +227,6 @@ const PASS_GRANT_APPLICATIONS: IGrantApplicationRequest[] = [
 		)
 	},
 ]
-
 
 const PASS_WORKSPACE_UPDATES: IWorkspaceUpdateRequest[] = [
 	{
