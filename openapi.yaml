@@ -243,8 +243,8 @@ components:
       type: object
       additionalProperties: false
       properties:
-        details:
-          type: string
+        fields:
+          $ref: "#/components/schemas/GrantApplicationFieldAnswers"
         milestones:
           type: array
           maximum: 100

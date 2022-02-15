@@ -69,7 +69,7 @@ export interface components {
       milestones?: components["schemas"]["GrantProposedMilestone"][];
     };
     GrantApplicationUpdate: {
-      details?: string;
+      fields?: components["schemas"]["GrantApplicationFieldAnswers"];
       milestones?: components["schemas"]["GrantProposedMilestone"][];
       feedback?: string;
     };
