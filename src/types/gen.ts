@@ -22,6 +22,9 @@ export interface paths {
   "/validate/grant-application-update": {
     post: operations["validateGrantApplicationUpdate"];
   };
+  "/validate/application-milestone-update": {
+    post: operations["validateApplicationMilestoneUpdate"];
+  };
 }
 
 export interface components {
@@ -96,6 +99,9 @@ export interface components {
       /** @description IPFS hash of the cover of the workspace */
       coverImageIpfsHash?: string;
       socials?: components["schemas"]["SocialItem"][];
+    };
+    ApplicationMilestoneUpdate: {
+      text: string;
     };
     GrantFieldMap: {
       applicantName: components["schemas"]["GrantField"];
@@ -235,6 +241,18 @@ export interface operations {
     requestBody: {
       content: {
         "application/json": components["schemas"]["GrantApplicationUpdate"];
+      };
+    };
+  };
+  validateApplicationMilestoneUpdate: {
+    responses: {
+      200: components["responses"]["ValidationSuccessResponse"];
+      400: components["responses"]["ErrorResponse"];
+      500: components["responses"]["ErrorResponse"];
+    };
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["ApplicationMilestoneUpdate"];
       };
     };
   };
