@@ -43,7 +43,7 @@ export interface components {
     /** @description Positive integer amount of currency. Is a string to allow bigint inputs */
     Amount: string;
     /** @description Chain ID of the network */
-    SupportedNetwork: "1" | "4" | "137" | "80001";
+    SupportedNetwork: "1" | "4" | "137" | "80001" | "1666700000" | "1666600000";
     GrantField: {
       /** @description Human readable title of the field */
       title: string;

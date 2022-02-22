@@ -172,6 +172,8 @@ components:
         - '4' # Rinkeby testnet
         - '137' # Polygon
         - '80001' # Polygon testnet
+        - '1666700000' # harmony
+        - '1666600000' # harmony
     GrantField:
       type: object
       additionalProperties: false
