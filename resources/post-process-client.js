@@ -14,6 +14,9 @@ const PACKAGE_LOCATION = process.env.PACKAGE_LOCATION;
 	let apiTsContents = await readFile(file, 'utf-8')
 	// generator did not type up additionalProperties correctly
 	apiTsContents = apiTsContents.replace('[key: string]: Array | any', '[key: string]: Array<string>')
+	// since the committed format is integer, the generator types it as a number
+	// but we need it as a string because the committed number will be larger than a 64 bit unsigned integer
+	apiTsContents = apiTsContents.replace("'committed': number", "'committed': string")
 
 	await writeFile(file, apiTsContents)
 })()
