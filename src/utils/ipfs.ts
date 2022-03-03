@@ -3,7 +3,7 @@ import axios from 'axios'
 import FormData from 'form-data'
 import logger from './logger'
 
-const IPFS_UPLOAD_ENDPOINT = 'https://ipfs.infura.io:5001/api/v0/add?pin=true'
+const IPFS_UPLOAD_ENDPOINT = 'https://api.thegraph.com/ipfs/api/v0/add'
 
 const IPFS_AUTH = (() => {
 	const { INFURA_PROJECT_ID, INFURA_PROJECT_SECRET } = process.env
@@ -48,5 +48,5 @@ export const uploadToIPFS = async(
 export const getUrlForIPFSHash = (hash: string) => (
 	// https://docs.ipfs.io/concepts/what-is-ipfs
 	// https://infura.io/docs/ipfs#section/Getting-Started/Pin-a-file
-	`https://ipfs.infura.io:5001/api/v0/cat?arg=${hash}`
+	`https://api.thegraph.com/ipfs/api/v0/cat?arg=${hash}`
 )
