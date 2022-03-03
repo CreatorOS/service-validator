@@ -154,7 +154,7 @@ const PASS_GRANTS: IGrantCreateRequest[] = [
 		details: chance.paragraph(),
 		reward: {
 			committed: '100',
-			asset: '0xA0A1'
+			asset: '0xA0A2BC123456643222323232323292'
 		},
 		creatorId: chance.guid(),
 		workspaceId: chance.guid(),
@@ -172,8 +172,8 @@ const PASS_GRANTS: IGrantCreateRequest[] = [
 		summary: chance.paragraph(),
 		details: chance.paragraph(),
 		reward: {
-			committed: '11234',
-			asset: '0xA0A2'
+			committed: '1123421223',
+			asset: '0xA0A2BC12345664322232323232323'
 		},
 		creatorId: chance.guid(),
 		workspaceId: chance.guid(),
