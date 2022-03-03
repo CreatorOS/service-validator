@@ -204,7 +204,6 @@ components:
             type: string
             maxLength: 256
           maxItems: 20
-          uniqueItems: true
     GrantProposedMilestone:
       type: object
       required:
@@ -271,7 +270,6 @@ components:
           maxItems: 100
           items:
             $ref: "#/components/schemas/GrantProposedMilestone"
-          uniqueItems: true
     GrantApplicationUpdate:
       type: object
       additionalProperties: false
@@ -283,7 +281,6 @@ components:
           maxItems: 100
           items:
             $ref: "#/components/schemas/GrantProposedMilestone"
-          uniqueItems: true
         feedback:
           type: string
           minLength: 1
@@ -333,13 +330,11 @@ components:
           maxItems: 25
           items:
             $ref: "#/components/schemas/SupportedNetwork"
-          uniqueItems: true
         socials:
           type: array
           items:
             $ref: "#/components/schemas/SocialItem"
           maxItems: 10
-          uniqueItems: true
     WorkspaceUpdateRequest:
       type: object
       additionalProperties: false
@@ -363,7 +358,6 @@ components:
           items:
             $ref: "#/components/schemas/SocialItem"
           maxItems: 10
-          uniqueItems: true
     ApplicationMilestoneUpdate:
       type: object
       additionalProperties: false
