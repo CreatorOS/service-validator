@@ -146,7 +146,7 @@ components:
       properties:
         statusCode:
           type: integer
-          minimum: 200
+          minLength: 200
           maximum: 505
         error:
           type: string
@@ -160,15 +160,15 @@ components:
     Asset:
       type: string
       example: '0x95b58a6bff3d14b7db2f5cb5f0ad413dc2940658'
-      minimum: 16
-      maximum: 256
+      minLength: 16
+      maxLength: 256
       format: hex
     Amount:
       type: string
       pattern: '^[0-9]{1,64}$'
       description: Positive integer amount of currency. Is a string to allow bigint inputs
       format: integer
-      maximum: 64
+      maxLength: 64
     SupportedNetwork:
       type: string
       description: Chain ID of the network
@@ -189,7 +189,7 @@ components:
         title:
           description: Human readable title of the field
           type: string
-          maximum: 512
+          maxLength: 512
         inputType:
           type: string
           enum:
@@ -202,8 +202,8 @@ components:
           type: array
           items:
             type: string
-            maximum: 256
-          maximum: 20
+            maxLength: 256
+          maxItems: 20
     GrantProposedMilestone:
       type: object
       required:
@@ -212,22 +212,22 @@ components:
       properties:
         title:
           type: string
-          maximum: 255
+          maxLength: 255
         amount:
           $ref: '#/components/schemas/Amount'
     GrantApplicationFieldAnswer:
       type: array
       items:
         type: string
-        maximum: 7000
-      maximum: 100
+        maxLength: 7000
+      maxItems: 100
     RequiredGrantApplicationFieldAnswer:
       type: array
       items:
         type: string
-        maximum: 7000
-      maximum: 100
-      minimum: 1
+        maxLength: 7000
+      maxItems: 100
+      minLength: 1
     GrantApplicationFieldAnswers:
       type: object
       description: Maps ID of the field to the answer by the applicant
@@ -267,7 +267,7 @@ components:
           $ref: "#/components/schemas/GrantApplicationFieldAnswers"
         milestones:
           type: array
-          maximum: 100
+          maxItems: 100
           items:
             $ref: "#/components/schemas/GrantProposedMilestone"
     GrantApplicationUpdate:
@@ -278,13 +278,13 @@ components:
           $ref: "#/components/schemas/GrantApplicationFieldAnswers"
         milestones:
           type: array
-          maximum: 100
+          maxItems: 100
           items:
             $ref: "#/components/schemas/GrantProposedMilestone"
         feedback:
           type: string
-          minimum: 1
-          maximum: 2048
+          minLength: 1
+          maxLength: 4096
     SocialItem:
       type: object
       additionalProperties: false
@@ -294,10 +294,10 @@ components:
       properties:
         name:
           type: string
-          maximum: 64
+          maxLength: 64
         value:
           type: string
-          maximum: 255
+          maxLength: 255
     WorkspaceCreateRequest:
       type: object
       additionalProperties: false
@@ -311,53 +311,53 @@ components:
       properties:
         title:
           type: string
-          maximum: 128
+          maxLength: 128
         about:
           type: string
-          maximum: 5000
+          maxLength: 5000
         logoIpfsHash:
           type: string
           description: IPFS hash of the logo of the workspace
-          maximum: 128
+          maxLength: 128
         coverImageIpfsHash:
           type: string
           description: IPFS hash of the cover of the workspace
-          maximum: 128
+          maxLength: 128
         creatorId:
           $ref: "#/components/schemas/OwnerID"
         supportedNetworks:
           type: array
-          maximum: 100
+          maxItems: 25
           items:
             $ref: "#/components/schemas/SupportedNetwork"
         socials:
           type: array
           items:
             $ref: "#/components/schemas/SocialItem"
-          maximum: 10
+          maxItems: 10
     WorkspaceUpdateRequest:
       type: object
       additionalProperties: false
       properties:
         title:
           type: string
-          maximum: 128
+          maxLength: 128
         about:
           type: string
-          maximum: 5000
+          maxLength: 5000
         logoIpfsHash:
           type: string
           description: IPFS hash of the logo of the workspace
-          maximum: 128
+          maxLength: 128
         coverImageIpfsHash:
           type: string
           description: IPFS hash of the cover of the workspace
-          maximum: 128
+          maxLength: 128
         socials:
           type: array
           items:
             $ref: "#/components/schemas/SocialItem"
-          maximum: 10
+          maxItems: 10
     ApplicationMilestoneUpdate:
       type: object
       additionalProperties: false
@@ -366,7 +366,7 @@ components:
       properties:
         text:
           type: string
-          maximum: 4096
+          maxLength: 4096
     GrantFieldMap:
       type: object
       additionalProperties:
@@ -413,18 +413,18 @@ components:
       properties:
         title:
           type: string
-          maximum: 255
+          maxLength: 255
         summary:
           type: string
-          maximum: 1024
+          maxLength: 1024
         details:
           type: string
-          maximum: 4096
+          maxLength: 4096
         deadline:
           type: string
           format: date-time
           description: Deadline of the application
-          maximum: 128
+          maxLength: 128
         reward:
           $ref: "#/components/schemas/GrantReward"
         creatorId:
@@ -432,7 +432,7 @@ components:
         workspaceId:
           type: string
           description: the workspace the grant is from
-          maximum: 128
+          maxLength: 128
         fields:
           $ref: "#/components/schemas/GrantFieldMap"
     GrantUpdateRequest:
@@ -441,26 +441,26 @@ components:
       properties:
         title:
           type: string
-          maximum: 255
+          maxLength: 255
         summary:
           type: string
-          maximum: 1024
+          maxLength: 1024
         details:
           type: string
-          maximum: 4096
+          maxLength: 4096
         deadline:
           type: string
           format: date-time
           description: Deadline of the application
-          maximum: 128
+          maxLength: 128
         reward:
           $ref: "#/components/schemas/GrantReward"
         fields:
           $ref: "#/components/schemas/GrantFieldMap"
     OwnerID:
       type: string
-      minimum: 16
-      maximum: 255
+      minLength: 16
+      maxLength: 255
       example: '0x71C7656EC7ab88b098defB751B7411C5f6d8976F'
   responses:
     ValidationSuccessResponse:
