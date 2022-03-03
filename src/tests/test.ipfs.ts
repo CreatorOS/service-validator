@@ -10,7 +10,7 @@ describe('IPFS Upload Tests', () => {
 		expect(hash).toBeTruthy()
 
 		const url = await getUrlForIPFSHash(hash)
-		const data = await axios(url)
+		const data = await axios.post(url)
 		expect(data.data).toEqual(json)
 	})
 })
