@@ -311,11 +311,9 @@ components:
       properties:
         title:
           type: string
-          minimum: 5
           maximum: 128
         about:
           type: string
-          minimum: 5
           maximum: 5000
         logoIpfsHash:
           type: string
@@ -343,11 +341,9 @@ components:
       properties:
         title:
           type: string
-          minimum: 5
           maximum: 128
         about:
           type: string
-          minimum: 5
           maximum: 5000
         logoIpfsHash:
           type: string
@@ -417,15 +413,12 @@ components:
       properties:
         title:
           type: string
-          minimum: 5
           maximum: 255
         summary:
           type: string
-          minimum: 5
           maximum: 1024
         details:
           type: string
-          minimum: 50
           maximum: 4096
         deadline:
           type: string
@@ -448,15 +441,13 @@ components:
       properties:
         title:
           type: string
-          minimum: 5
           maximum: 255
         summary:
           type: string
-          minimum: 5
           maximum: 1024
         details:
           type: string
-          minimum: 50
+          maximum: 4096
         deadline:
           type: string
           format: date-time
