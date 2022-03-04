@@ -59,6 +59,8 @@ export interface components {
       inputType: "short-form" | "long-form" | "numeric" | "array";
       /** @description Constraint possible inputs for this field */
       enum?: string[];
+      /** @description Whether this field is PII (personally identifiable information) or not */
+      pii?: boolean;
     };
     GrantProposedMilestone: {
       title: string;

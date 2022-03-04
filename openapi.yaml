@@ -222,6 +222,10 @@ components:
             type: string
             maxLength: 256
           maxItems: 20
+        pii:
+          description: Whether this field is PII (personally identifiable information) or not
+          type: boolean
+          default: false 
     GrantProposedMilestone:
       type: object
       required:
