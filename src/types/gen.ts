@@ -66,8 +66,12 @@ export interface components {
       title: string;
       amount: components["schemas"]["Amount"];
     };
-    GrantApplicationFieldAnswer: string[];
-    RequiredGrantApplicationFieldAnswer: string[];
+    GrantApplicationFieldAnswer: components["schemas"]["GrantApplicationFieldAnswerItem"][];
+    RequiredGrantApplicationFieldAnswer: components["schemas"]["GrantApplicationFieldAnswerItem"][];
+    GrantApplicationFieldAnswerItem: {
+      value: string;
+      address?: components["schemas"]["Address"];
+    };
     /** @description Maps ID of the field to the answer by the applicant */
     GrantApplicationFieldAnswers: {
       applicantName: components["schemas"]["RequiredGrantApplicationFieldAnswer"];
@@ -101,12 +105,18 @@ export interface components {
       creatorId: components["schemas"]["OwnerID"];
       supportedNetworks: components["schemas"]["SupportedNetwork"][];
       socials: components["schemas"]["SocialItem"][];
-      publicKeys?: components["schemas"]["PublicKeyMap"];
+      publicKeys?: components["schemas"]["PublicKeyMap"][];
     };
+    /** @description The public encryption key associated with the account address */
     PublicKey: string;
-    PublicKeyMap: { [key: string]: components["schemas"]["PublicKey"] };
+    /** @description The account address associated with public key */
+    Address: string;
+    PublicKeyMap: {
+      publicKey?: components["schemas"]["PublicKey"];
+      address?: components["schemas"]["Address"];
+    };
     WorkspacePublicKeysUpdateRequest: {
-      publicKeys?: components["schemas"]["PublicKeyMap"];
+      publicKeys?: components["schemas"]["PublicKeyMap"][];
     };
     WorkspaceUpdateRequest: {
       title?: string;

@@ -214,14 +214,12 @@ const PASS_WORKSPACES: IWorkspaceCreateRequest[] = [
 			{ name: 'twitter', value: chance.url() },
 			{ name: 'discord', value: chance.url() }
 		],
-		publicKeys: {
-			...[...Array(4)].reduce(
-				(dict, _, i) => ({
-					...dict,
-					[chance.guid()]: chance.guid()
-				}), { }
-			)
-		}
+		publicKeys: [...Array(4)].map(
+			() => ({
+				publicKey: chance.guid(),
+				address: chance.guid(),
+			})
+		)
 	},
 ]
 
@@ -230,15 +228,40 @@ const PASS_GRANT_APPLICATIONS: IGrantApplicationRequest[] = [
 		grantId: chance.guid(),
 		applicantId: chance.guid(),
 		fields: {
-			applicantName: [chance.name()],
-			applicantEmail: [chance.email()],
-			projectName: [chance.name()],
-			projectDetails: [chance.paragraph()],
-			fundingBreakdown: [chance.paragraph()],
+			applicantName: [...Array(1)].map(
+				() => ({
+					value: chance.name(),
+				})
+			),
+			applicantEmail: [...Array(3)].map(
+				() => ({
+					address: chance.guid(),
+					value: chance.email(),
+				})
+			),
+			projectName: [...Array(1)].map(
+				() => ({
+					value: chance.name(),
+				})
+			),
+			projectDetails: [...Array(1)].map(
+				() => ({
+					value: chance.paragraph(),
+				})
+			),
+			fundingBreakdown: [...Array(1)].map(
+				() => ({
+					value: chance.paragraph(),
+				})
+			),
 			...[...Array(4)].reduce(
 				(dict, _, i) => ({
 					...dict,
-					[i.toString()]: [chance.sentence()]
+					[i.toString()]: [...Array(1)].map(
+						() => ({
+							value: chance.sentence(),
+						})
+					),
 				}), { }
 			)
 		},
@@ -266,13 +289,11 @@ const PASS_WORKSPACE_UPDATES: IWorkspaceUpdateRequest[] = [
 
 const PASS_WORKSPACE_PUBLIC_KEYS_UPDATES: IWorkspacePublicKeysUpdateRequest[] = [
 	{
-		publicKeys: {
-			...[...Array(4)].reduce(
-				(dict, _, i) => ({
-					...dict,
-					[chance.guid()]: chance.guid()
-				}), { }
-			)
-		}
+		publicKeys: [...Array(4)].map(
+			() => ({
+				publicKey: chance.guid(),
+				address: chance.guid(),
+			})
+		)
 	},
 ]

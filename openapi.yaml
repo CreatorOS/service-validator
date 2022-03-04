@@ -240,16 +240,24 @@ components:
     GrantApplicationFieldAnswer:
       type: array
       items:
-        type: string
-        maxLength: 7000
+        $ref: '#/components/schemas/GrantApplicationFieldAnswerItem'
       maxItems: 100
     RequiredGrantApplicationFieldAnswer:
       type: array
       items:
-        type: string
-        maxLength: 7000
+        $ref: '#/components/schemas/GrantApplicationFieldAnswerItem'
       maxItems: 100
       minLength: 1
+    GrantApplicationFieldAnswerItem:
+      type: object
+      required:
+        - value
+      properties:
+        value: 
+          type: string
+          maxLength: 7000
+        address:
+          $ref: '#/components/schemas/Address'
     GrantApplicationFieldAnswers:
       type: object
       description: Maps ID of the field to the answer by the applicant
@@ -358,20 +366,33 @@ components:
             $ref: "#/components/schemas/SocialItem"
           maxItems: 10
         publicKeys:
-          $ref: "#/components/schemas/PublicKeyMap"
+          type: array
+          items:
+            $ref: "#/components/schemas/PublicKeyMap"
     PublicKey:
+      description: The public encryption key associated with the account address
       type: string
-      maxLength: 128
+      maxLength: 255
+    Address:
+      description: The account address associated with public key 
+      type: string
+      minLength: 16
+      maxLength: 255
     PublicKeyMap:
       type: object
-      additionalProperties:
-        $ref: "#/components/schemas/PublicKey"
+      properties:
+        publicKey:
+          $ref: "#/components/schemas/PublicKey"
+        address:
+          $ref: "#/components/schemas/Address"
     WorkspacePublicKeysUpdateRequest:
       type: object
       additionalProperties: false
       properties:
         publicKeys:
-          $ref: "#/components/schemas/PublicKeyMap"
+          type: array
+          items:
+            $ref: "#/components/schemas/PublicKeyMap"
     WorkspaceUpdateRequest:
       type: object
       additionalProperties: false
