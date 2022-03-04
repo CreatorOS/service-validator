@@ -395,8 +395,6 @@ components:
           items:
             $ref: "#/components/schemas/SocialItem"
           maxItems: 10
-        publicKeys:
-          $ref: "#/components/schemas/PublicKeyMap"
     ApplicationMilestoneUpdate:
       type: object
       additionalProperties: false

@@ -116,7 +116,6 @@ export interface components {
       /** @description IPFS hash of the cover of the workspace */
       coverImageIpfsHash?: string;
       socials?: components["schemas"]["SocialItem"][];
-      publicKeys?: components["schemas"]["PublicKeyMap"];
     };
     ApplicationMilestoneUpdate: {
       text: string;

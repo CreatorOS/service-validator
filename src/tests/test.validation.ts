@@ -260,15 +260,7 @@ const PASS_WORKSPACE_UPDATES: IWorkspaceUpdateRequest[] = [
 		socials: [
 			{ name: 'twitter', value: chance.url() },
 			{ name: 'discord', value: chance.url() }
-		],
-		publicKeys: {
-			...[...Array(4)].reduce(
-				(dict, _, i) => ({
-					...dict,
-					[chance.guid()]: chance.guid()
-				}), { }
-			)
-		}
+		]
 	},
 ]
 
