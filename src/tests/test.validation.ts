@@ -1,6 +1,6 @@
 import { Chance } from 'chance'
 import request from 'supertest'
-import { IGrantApplicationRequest, IGrantCreateRequest, IGrantField, IWorkspaceCreateRequest, IWorkspaceUpdateRequest } from '../types'
+import { IGrantApplicationRequest, IGrantCreateRequest, IGrantField, IWorkspaceCreateRequest, IWorkspacePublicKeysUpdateRequest, IWorkspaceUpdateRequest } from '../types'
 import { Response } from '../utils/make-api'
 import { describeWithApp } from './test-setup'
 
@@ -59,6 +59,21 @@ describeWithApp('Validation Tests', app => {
 				.expect(200)
 				.then(
 					({ body }: { body: Response<'validateWorkspaceUpdate'> }) => {
+						expect(body.ipfsHash).toBeTruthy()
+						expect(body.url).toMatch(/https:/)
+					}
+				)
+		}
+	})
+
+	it('should validate & update workspace public keys correctly', async() => {
+		for(const appl of PASS_WORKSPACE_PUBLIC_KEYS_UPDATES) {
+			await request(app)
+				.post('/validate/workspace-public-keys-update')
+				.send(appl)
+				.expect(200)
+				.then(
+					({ body }: { body: Response<'validateWorkspacePublicKeysUpdate'> }) => {
 						expect(body.ipfsHash).toBeTruthy()
 						expect(body.url).toMatch(/https:/)
 					}
@@ -198,7 +213,15 @@ const PASS_WORKSPACES: IWorkspaceCreateRequest[] = [
 		socials: [
 			{ name: 'twitter', value: chance.url() },
 			{ name: 'discord', value: chance.url() }
-		]
+		],
+		publicKeys: {
+			...[...Array(4)].reduce(
+				(dict, _, i) => ({
+					...dict,
+					[chance.guid()]: chance.guid()
+				}), { }
+			)
+		}
 	},
 ]
 
@@ -237,6 +260,27 @@ const PASS_WORKSPACE_UPDATES: IWorkspaceUpdateRequest[] = [
 		socials: [
 			{ name: 'twitter', value: chance.url() },
 			{ name: 'discord', value: chance.url() }
-		]
+		],
+		publicKeys: {
+			...[...Array(4)].reduce(
+				(dict, _, i) => ({
+					...dict,
+					[chance.guid()]: chance.guid()
+				}), { }
+			)
+		}
+	},
+]
+
+const PASS_WORKSPACE_PUBLIC_KEYS_UPDATES: IWorkspacePublicKeysUpdateRequest[] = [
+	{
+		publicKeys: {
+			...[...Array(4)].reduce(
+				(dict, _, i) => ({
+					...dict,
+					[chance.guid()]: chance.guid()
+				}), { }
+			)
+		}
 	},
 ]

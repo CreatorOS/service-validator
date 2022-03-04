@@ -81,6 +81,24 @@ paths:
           $ref: '#/components/responses/ErrorResponse'
         '500':
           $ref: '#/components/responses/ErrorResponse'
+  /validate/workspace-public-keys-update:
+    post:
+      operationId: validateWorkspacePublicKeysUpdate
+      summary: Validate, upload & pin workspace publicKeys patch data to IPFS
+      tags:
+        - Validation
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WorkspacePublicKeysUpdateRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/ValidationSuccessResponse'
+        '400':
+          $ref: '#/components/responses/ErrorResponse'
+        '500':
+          $ref: '#/components/responses/ErrorResponse'
   /validate/grant-application-create:
     post:
       operationId: validateGrantApplicationCreate
@@ -335,6 +353,21 @@ components:
           items:
             $ref: "#/components/schemas/SocialItem"
           maxItems: 10
+        publicKeys:
+          $ref: "#/components/schemas/PublicKeyMap"
+    PublicKey:
+      type: string
+      maxLength: 128
+    PublicKeyMap:
+      type: object
+      additionalProperties:
+        $ref: "#/components/schemas/PublicKey"
+    WorkspacePublicKeysUpdateRequest:
+      type: object
+      additionalProperties: false
+      properties:
+        publicKeys:
+          $ref: "#/components/schemas/PublicKeyMap"
     WorkspaceUpdateRequest:
       type: object
       additionalProperties: false
@@ -358,6 +391,8 @@ components:
           items:
             $ref: "#/components/schemas/SocialItem"
           maxItems: 10
+        publicKeys:
+          $ref: "#/components/schemas/PublicKeyMap"
     ApplicationMilestoneUpdate:
       type: object
       additionalProperties: false
