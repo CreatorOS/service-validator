@@ -81,6 +81,24 @@ paths:
           $ref: '#/components/responses/ErrorResponse'
         '500':
           $ref: '#/components/responses/ErrorResponse'
+  /validate/workspace-public-keys-update:
+    post:
+      operationId: validateWorkspacePublicKeysUpdate
+      summary: Validate, upload & pin workspace publicKeys patch data to IPFS
+      tags:
+        - Validation
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WorkspacePublicKeysUpdateRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/ValidationSuccessResponse'
+        '400':
+          $ref: '#/components/responses/ErrorResponse'
+        '500':
+          $ref: '#/components/responses/ErrorResponse'
   /validate/grant-application-create:
     post:
       operationId: validateGrantApplicationCreate
@@ -157,7 +175,7 @@ components:
         data:
           type: object
           description: Some extra information about the error
-    Asset:
+    Address:
       type: string
       example: '0x95b58a6bff3d14b7db2f5cb5f0ad413dc2940658'
       minLength: 16
@@ -204,6 +222,10 @@ components:
             type: string
             maxLength: 256
           maxItems: 20
+        pii:
+          description: Whether this field is PII (personally identifiable information) or not
+          type: boolean
+          default: false 
     GrantProposedMilestone:
       type: object
       required:
@@ -218,16 +240,24 @@ components:
     GrantApplicationFieldAnswer:
       type: array
       items:
-        type: string
-        maxLength: 7000
+        $ref: '#/components/schemas/GrantApplicationFieldAnswerItem'
       maxItems: 100
     RequiredGrantApplicationFieldAnswer:
       type: array
       items:
-        type: string
-        maxLength: 7000
+        $ref: '#/components/schemas/GrantApplicationFieldAnswerItem'
       maxItems: 100
       minLength: 1
+    GrantApplicationFieldAnswerItem:
+      type: object
+      required:
+        - value
+      properties:
+        value: 
+          type: string
+          maxLength: 7000
+        address:
+          $ref: '#/components/schemas/Address'
     GrantApplicationFieldAnswers:
       type: object
       description: Maps ID of the field to the answer by the applicant
@@ -335,6 +365,29 @@ components:
           items:
             $ref: "#/components/schemas/SocialItem"
           maxItems: 10
+        publicKeys:
+          type: array
+          items:
+            $ref: "#/components/schemas/PublicKeyMap"
+    PublicKey:
+      description: The public encryption key associated with the account address
+      type: string
+      maxLength: 255
+    PublicKeyMap:
+      type: object
+      properties:
+        publicKey:
+          $ref: "#/components/schemas/PublicKey"
+        address:
+          $ref: "#/components/schemas/Address"
+    WorkspacePublicKeysUpdateRequest:
+      type: object
+      additionalProperties: false
+      properties:
+        publicKeys:
+          type: array
+          items:
+            $ref: "#/components/schemas/PublicKeyMap"
     WorkspaceUpdateRequest:
       type: object
       additionalProperties: false
@@ -398,7 +451,7 @@ components:
         committed:
             $ref: "#/components/schemas/Amount"
         asset:
-          $ref: "#/components/schemas/Asset"
+          $ref: "#/components/schemas/Address"
     GrantCreateRequest:
       type: object
       additionalProperties: false

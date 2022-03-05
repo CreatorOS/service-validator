@@ -16,6 +16,9 @@ export interface paths {
   "/validate/workspace-update": {
     post: operations["validateWorkspaceUpdate"];
   };
+  "/validate/workspace-public-keys-update": {
+    post: operations["validateWorkspacePublicKeysUpdate"];
+  };
   "/validate/grant-application-create": {
     post: operations["validateGrantApplicationCreate"];
   };
@@ -38,9 +41,15 @@ export interface components {
       /** @description Some extra information about the error */
       data?: { [key: string]: unknown };
     };
-    /** @example 0x95b58a6bff3d14b7db2f5cb5f0ad413dc2940658 */
-    Asset: string;
-    /** @description Positive integer amount of currency. Is a string to allow bigint inputs */
+    /**
+     * Format: hex
+     * @example 0x95b58a6bff3d14b7db2f5cb5f0ad413dc2940658
+     */
+    Address: string;
+    /**
+     * Format: integer
+     * @description Positive integer amount of currency. Is a string to allow bigint inputs
+     */
     Amount: string;
     /** @description Chain ID of the network */
     SupportedNetwork: "1" | "4" | "137" | "80001" | "1666700000" | "1666600000";
@@ -50,13 +59,19 @@ export interface components {
       inputType: "short-form" | "long-form" | "numeric" | "array";
       /** @description Constraint possible inputs for this field */
       enum?: string[];
+      /** @description Whether this field is PII (personally identifiable information) or not */
+      pii?: boolean;
     };
     GrantProposedMilestone: {
       title: string;
       amount: components["schemas"]["Amount"];
     };
-    GrantApplicationFieldAnswer: string[];
-    RequiredGrantApplicationFieldAnswer: string[];
+    GrantApplicationFieldAnswer: components["schemas"]["GrantApplicationFieldAnswerItem"][];
+    RequiredGrantApplicationFieldAnswer: components["schemas"]["GrantApplicationFieldAnswerItem"][];
+    GrantApplicationFieldAnswerItem: {
+      value: string;
+      address?: components["schemas"]["Address"];
+    };
     /** @description Maps ID of the field to the answer by the applicant */
     GrantApplicationFieldAnswers: {
       applicantName: components["schemas"]["RequiredGrantApplicationFieldAnswer"];
@@ -69,7 +84,7 @@ export interface components {
       grantId: string;
       applicantId: components["schemas"]["OwnerID"];
       fields: components["schemas"]["GrantApplicationFieldAnswers"];
-      milestones?: components["schemas"]["GrantProposedMilestone"][];
+      milestones: components["schemas"]["GrantProposedMilestone"][];
     };
     GrantApplicationUpdate: {
       fields?: components["schemas"]["GrantApplicationFieldAnswers"];
@@ -90,6 +105,16 @@ export interface components {
       creatorId: components["schemas"]["OwnerID"];
       supportedNetworks: components["schemas"]["SupportedNetwork"][];
       socials: components["schemas"]["SocialItem"][];
+      publicKeys?: components["schemas"]["PublicKeyMap"][];
+    };
+    /** @description The public encryption key associated with the account address */
+    PublicKey: string;
+    PublicKeyMap: {
+      publicKey?: components["schemas"]["PublicKey"];
+      address?: components["schemas"]["Address"];
+    };
+    WorkspacePublicKeysUpdateRequest: {
+      publicKeys?: components["schemas"]["PublicKeyMap"][];
     };
     WorkspaceUpdateRequest: {
       title?: string;
@@ -112,7 +137,7 @@ export interface components {
     } & { [key: string]: components["schemas"]["GrantField"] };
     GrantReward: {
       committed: components["schemas"]["Amount"];
-      asset: components["schemas"]["Asset"];
+      asset: components["schemas"]["Address"];
     };
     GrantCreateRequest: {
       title: string;
@@ -217,6 +242,18 @@ export interface operations {
     requestBody: {
       content: {
         "application/json": components["schemas"]["WorkspaceUpdateRequest"];
+      };
+    };
+  };
+  validateWorkspacePublicKeysUpdate: {
+    responses: {
+      200: components["responses"]["ValidationSuccessResponse"];
+      400: components["responses"]["ErrorResponse"];
+      500: components["responses"]["ErrorResponse"];
+    };
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["WorkspacePublicKeysUpdateRequest"];
       };
     };
   };
