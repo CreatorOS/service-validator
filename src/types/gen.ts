@@ -45,7 +45,7 @@ export interface components {
      * Format: hex
      * @example 0x95b58a6bff3d14b7db2f5cb5f0ad413dc2940658
      */
-    Asset: string;
+    Address: string;
     /**
      * Format: integer
      * @description Positive integer amount of currency. Is a string to allow bigint inputs
@@ -109,8 +109,6 @@ export interface components {
     };
     /** @description The public encryption key associated with the account address */
     PublicKey: string;
-    /** @description The account address associated with public key */
-    Address: string;
     PublicKeyMap: {
       publicKey?: components["schemas"]["PublicKey"];
       address?: components["schemas"]["Address"];
@@ -139,7 +137,7 @@ export interface components {
     } & { [key: string]: components["schemas"]["GrantField"] };
     GrantReward: {
       committed: components["schemas"]["Amount"];
-      asset: components["schemas"]["Asset"];
+      asset: components["schemas"]["Address"];
     };
     GrantCreateRequest: {
       title: string;
