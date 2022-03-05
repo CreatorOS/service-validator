@@ -175,7 +175,7 @@ components:
         data:
           type: object
           description: Some extra information about the error
-    Asset:
+    Address:
       type: string
       example: '0x95b58a6bff3d14b7db2f5cb5f0ad413dc2940658'
       minLength: 16
@@ -373,11 +373,6 @@ components:
       description: The public encryption key associated with the account address
       type: string
       maxLength: 255
-    Address:
-      description: The account address associated with public key 
-      type: string
-      minLength: 16
-      maxLength: 255
     PublicKeyMap:
       type: object
       properties:
@@ -456,7 +451,7 @@ components:
         committed:
             $ref: "#/components/schemas/Amount"
         asset:
-          $ref: "#/components/schemas/Asset"
+          $ref: "#/components/schemas/Address"
     GrantCreateRequest:
       type: object
       additionalProperties: false
