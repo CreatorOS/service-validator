@@ -180,7 +180,10 @@ const PASS_GRANTS: IGrantCreateRequest[] = [
 			projectDetails: makeGrantField(),
 			fundingBreakdown: makeGrantField(),
 			[chance.guid()]: makeGrantField()
-		}
+		},
+		grantManagers: [...Array(4)].map(
+			() => (chance.guid())
+		)
 	},
 	{
 		title: chance.sentence(),
