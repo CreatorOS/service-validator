@@ -491,7 +491,7 @@ components:
         grantManagers:
           type: array
           items:
-            $ref: "#/components/schemas/PublicKeyMap"
+            $ref: "#/components/schemas/Address"
     GrantUpdateRequest:
       type: object
       additionalProperties: false
@@ -517,7 +517,7 @@ components:
         grantManagers:
           type: array
           items:
-            $ref: "#/components/schemas/PublicKeyMap"
+            $ref: "#/components/schemas/Address"
     OwnerID:
       type: string
       minLength: 16

@@ -182,10 +182,7 @@ const PASS_GRANTS: IGrantCreateRequest[] = [
 			[chance.guid()]: makeGrantField()
 		},
 		grantManagers: [...Array(4)].map(
-			() => ({
-				publicKey: chance.guid(),
-				address: chance.guid(),
-			})
+			() => (chance.guid())
 		)
 	},
 	{
