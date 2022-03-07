@@ -488,6 +488,10 @@ components:
           maxLength: 128
         fields:
           $ref: "#/components/schemas/GrantFieldMap"
+        grantManagers:
+          type: array
+          items:
+            $ref: "#/components/schemas/PublicKeyMap"
     GrantUpdateRequest:
       type: object
       additionalProperties: false
@@ -510,6 +514,10 @@ components:
           $ref: "#/components/schemas/GrantReward"
         fields:
           $ref: "#/components/schemas/GrantFieldMap"
+        grantManagers:
+          type: array
+          items:
+            $ref: "#/components/schemas/PublicKeyMap"
     OwnerID:
       type: string
       minLength: 16

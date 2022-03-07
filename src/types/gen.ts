@@ -153,6 +153,7 @@ export interface components {
       /** @description the workspace the grant is from */
       workspaceId: string;
       fields: components["schemas"]["GrantFieldMap"];
+      grantManagers?: components["schemas"]["PublicKeyMap"][];
     };
     GrantUpdateRequest: {
       title?: string;
@@ -165,6 +166,7 @@ export interface components {
       deadline?: Date | string;
       reward?: components["schemas"]["GrantReward"];
       fields?: components["schemas"]["GrantFieldMap"];
+      grantManagers?: components["schemas"]["PublicKeyMap"][];
     };
     /** @example 0x71C7656EC7ab88b098defB751B7411C5f6d8976F */
     OwnerID: string;
