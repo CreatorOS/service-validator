@@ -217,12 +217,7 @@ const PASS_WORKSPACES: IWorkspaceCreateRequest[] = [
 			{ name: 'twitter', value: chance.url() },
 			{ name: 'discord', value: chance.url() }
 		],
-		publicKeys: [...Array(4)].map(
-			() => ({
-				publicKey: chance.guid(),
-				address: chance.guid(),
-			})
-		)
+		creatorPublicKey: chance.guid(),
 	},
 ]
 

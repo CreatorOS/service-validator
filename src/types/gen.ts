@@ -103,9 +103,9 @@ export interface components {
       /** @description IPFS hash of the cover of the workspace */
       coverImageIpfsHash?: string;
       creatorId: components["schemas"]["OwnerID"];
+      creatorPublicKey?: components["schemas"]["PublicKey"];
       supportedNetworks: components["schemas"]["SupportedNetwork"][];
       socials: components["schemas"]["SocialItem"][];
-      publicKeys?: components["schemas"]["PublicKeyMap"][];
     };
     /** @description The public encryption key associated with the account address */
     PublicKey: string;

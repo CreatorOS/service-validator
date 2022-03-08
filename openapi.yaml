@@ -355,6 +355,8 @@ components:
           maxLength: 128
         creatorId:
           $ref: "#/components/schemas/OwnerID"
+        creatorPublicKey:
+          $ref: "#/components/schemas/PublicKey"
         supportedNetworks:
           type: array
           maxItems: 25
@@ -365,10 +367,6 @@ components:
           items:
             $ref: "#/components/schemas/SocialItem"
           maxItems: 10
-        publicKeys:
-          type: array
-          items:
-            $ref: "#/components/schemas/PublicKeyMap"
     PublicKey:
       description: The public encryption key associated with the account address
       type: string
