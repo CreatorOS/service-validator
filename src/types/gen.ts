@@ -109,12 +109,9 @@ export interface components {
     };
     /** @description The public encryption key associated with the account address */
     PublicKey: string;
-    PublicKeyMap: {
-      publicKey?: components["schemas"]["PublicKey"];
-      address?: components["schemas"]["Address"];
-    };
     WorkspacePublicKeysUpdateRequest: {
-      publicKeys?: components["schemas"]["PublicKeyMap"][];
+      walletId?: components["schemas"]["Address"];
+      publicKey: components["schemas"]["PublicKey"];
     };
     WorkspaceUpdateRequest: {
       title?: string;

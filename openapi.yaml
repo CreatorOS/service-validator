@@ -371,21 +371,16 @@ components:
       description: The public encryption key associated with the account address
       type: string
       maxLength: 255
-    PublicKeyMap:
-      type: object
-      properties:
-        publicKey:
-          $ref: "#/components/schemas/PublicKey"
-        address:
-          $ref: "#/components/schemas/Address"
     WorkspacePublicKeysUpdateRequest:
       type: object
       additionalProperties: false
+      required:
+        - publicKey
       properties:
-        publicKeys:
-          type: array
-          items:
-            $ref: "#/components/schemas/PublicKeyMap"
+        walletId:
+          $ref: "#/components/schemas/Address"
+        publicKey:
+          $ref: "#/components/schemas/PublicKey"
     WorkspaceUpdateRequest:
       type: object
       additionalProperties: false

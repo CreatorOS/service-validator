@@ -287,11 +287,7 @@ const PASS_WORKSPACE_UPDATES: IWorkspaceUpdateRequest[] = [
 
 const PASS_WORKSPACE_PUBLIC_KEYS_UPDATES: IWorkspacePublicKeysUpdateRequest[] = [
 	{
-		publicKeys: [...Array(4)].map(
-			() => ({
-				publicKey: chance.guid(),
-				address: chance.guid(),
-			})
-		)
+		publicKey: chance.guid(),
+		walletId: chance.guid(),
 	},
 ]
