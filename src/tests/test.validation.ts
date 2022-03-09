@@ -233,7 +233,6 @@ const PASS_GRANT_APPLICATIONS: IGrantApplicationRequest[] = [
 			),
 			applicantEmail: [...Array(3)].map(
 				() => ({
-					address: chance.guid(),
 					value: chance.email(),
 				})
 			),

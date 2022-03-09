@@ -70,15 +70,17 @@ export interface components {
     RequiredGrantApplicationFieldAnswer: components["schemas"]["GrantApplicationFieldAnswerItem"][];
     GrantApplicationFieldAnswerItem: {
       value: string;
-      address?: components["schemas"]["Address"];
     };
+    /**
+     * Format: base64
+     * @description JSON serialized object, encrypted with a specific user's public key
+     */
+    PIIAnswer: string;
+    /** @description Map of encrypted information mapped by the wallet ID, whose public key was used to map the specific information */
+    PIIAnswers: { [key: string]: components["schemas"]["PIIAnswer"] };
     /** @description Maps ID of the field to the answer by the applicant */
     GrantApplicationFieldAnswers: {
-      applicantName: components["schemas"]["RequiredGrantApplicationFieldAnswer"];
-      applicantEmail: components["schemas"]["RequiredGrantApplicationFieldAnswer"];
-      projectName: components["schemas"]["RequiredGrantApplicationFieldAnswer"];
-      projectDetails: components["schemas"]["RequiredGrantApplicationFieldAnswer"];
-      fundingBreakdown: components["schemas"]["RequiredGrantApplicationFieldAnswer"];
+      pii?: components["schemas"]["PIIAnswers"];
     } & { [key: string]: components["schemas"]["GrantApplicationFieldAnswer"] };
     GrantApplicationRequest: {
       grantId: string;
