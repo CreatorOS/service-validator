@@ -247,39 +247,33 @@ components:
       items:
         $ref: '#/components/schemas/GrantApplicationFieldAnswerItem'
       maxItems: 100
-      minLength: 1
+      minItems: 1
     GrantApplicationFieldAnswerItem:
       type: object
+      additionalProperties: false
       required:
         - value
       properties:
         value: 
           type: string
           maxLength: 7000
-        address:
-          $ref: '#/components/schemas/Address'
+    PIIAnswer:
+      type: string
+      description: JSON serialized object, encrypted with a specific user's public key
+      format: base64
+    PIIAnswers:
+      type: object
+      description: Map of encrypted information mapped by the wallet ID, whose public key was used to map the specific information
+      additionalProperties:
+        $ref: '#/components/schemas/PIIAnswer'
     GrantApplicationFieldAnswers:
       type: object
       description: Maps ID of the field to the answer by the applicant
       additionalProperties:
         $ref: '#/components/schemas/GrantApplicationFieldAnswer'
-      required:
-        - applicantName
-        - applicantEmail
-        - projectName
-        - projectDetails
-        - fundingBreakdown
       properties:
-        applicantName:
-          $ref: '#/components/schemas/RequiredGrantApplicationFieldAnswer'
-        applicantEmail:
-          $ref: '#/components/schemas/RequiredGrantApplicationFieldAnswer'
-        projectName:
-          $ref: '#/components/schemas/RequiredGrantApplicationFieldAnswer'
-        projectDetails:
-          $ref: '#/components/schemas/RequiredGrantApplicationFieldAnswer'
-        fundingBreakdown:
-          $ref: '#/components/schemas/RequiredGrantApplicationFieldAnswer'
+        pii:
+          $ref: '#/components/schemas/PIIAnswers'
     GrantApplicationRequest:
       type: object
       additionalProperties: false
