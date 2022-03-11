@@ -18,6 +18,12 @@ const PACKAGE_LOCATION = process.env.PACKAGE_LOCATION;
 	// but we need it as a string because the committed number will be larger than a 64 bit unsigned integer
 	apiTsContents = apiTsContents.replace("'committed': number", "'committed': string")
 	apiTsContents = apiTsContents.replace("'amount': number", "'amount': string")
+	// GrantApplicationFieldAnswers cannot be an interface, hence switch to using type
+	apiTsContents = apiTsContents.replace(
+		`export interface GrantApplicationFieldAnswers {
+    [key: string]: Array<GrantApplicationFieldAnswerItem>;`,
+		'export type GrantApplicationFieldAnswers = { [key: string]: Array<GrantApplicationFieldAnswerItem> } & {'
+	)
 
 	await writeFile(file, apiTsContents)
 })()
