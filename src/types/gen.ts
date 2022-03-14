@@ -16,9 +16,6 @@ export interface paths {
   "/validate/workspace-update": {
     post: operations["validateWorkspaceUpdate"];
   };
-  "/validate/workspace-public-keys-update": {
-    post: operations["validateWorkspacePublicKeysUpdate"];
-  };
   "/validate/grant-application-create": {
     post: operations["validateGrantApplicationCreate"];
   };
@@ -113,10 +110,6 @@ export interface components {
     };
     /** @description The public encryption key associated with the account address */
     PublicKey: string;
-    WorkspacePublicKeysUpdateRequest: {
-      walletId?: components["schemas"]["Address"];
-      publicKey: components["schemas"]["PublicKey"];
-    };
     WorkspaceUpdateRequest: {
       title?: string;
       about?: string;
@@ -125,6 +118,7 @@ export interface components {
       /** @description IPFS hash of the cover of the workspace */
       coverImageIpfsHash?: string;
       socials?: components["schemas"]["SocialItem"][];
+      publicKey?: components["schemas"]["PublicKey"];
     };
     ApplicationMilestoneUpdate: {
       text: string;
@@ -245,18 +239,6 @@ export interface operations {
     requestBody: {
       content: {
         "application/json": components["schemas"]["WorkspaceUpdateRequest"];
-      };
-    };
-  };
-  validateWorkspacePublicKeysUpdate: {
-    responses: {
-      200: components["responses"]["ValidationSuccessResponse"];
-      400: components["responses"]["ErrorResponse"];
-      500: components["responses"]["ErrorResponse"];
-    };
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["WorkspacePublicKeysUpdateRequest"];
       };
     };
   };

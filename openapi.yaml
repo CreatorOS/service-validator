@@ -81,24 +81,6 @@ paths:
           $ref: '#/components/responses/ErrorResponse'
         '500':
           $ref: '#/components/responses/ErrorResponse'
-  /validate/workspace-public-keys-update:
-    post:
-      operationId: validateWorkspacePublicKeysUpdate
-      summary: Validate, upload & pin workspace publicKeys patch data to IPFS
-      tags:
-        - Validation
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/WorkspacePublicKeysUpdateRequest'
-      responses:
-        '200':
-          $ref: '#/components/responses/ValidationSuccessResponse'
-        '400':
-          $ref: '#/components/responses/ErrorResponse'
-        '500':
-          $ref: '#/components/responses/ErrorResponse'
   /validate/grant-application-create:
     post:
       operationId: validateGrantApplicationCreate
@@ -366,16 +348,6 @@ components:
       description: The public encryption key associated with the account address
       type: string
       maxLength: 255
-    WorkspacePublicKeysUpdateRequest:
-      type: object
-      additionalProperties: false
-      required:
-        - publicKey
-      properties:
-        walletId:
-          $ref: "#/components/schemas/Address"
-        publicKey:
-          $ref: "#/components/schemas/PublicKey"
     WorkspaceUpdateRequest:
       type: object
       additionalProperties: false
@@ -399,6 +371,8 @@ components:
           items:
             $ref: "#/components/schemas/SocialItem"
           maxItems: 10
+        publicKey:
+          $ref: "#/components/schemas/PublicKey"
     ApplicationMilestoneUpdate:
       type: object
       additionalProperties: false
