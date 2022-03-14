@@ -80,16 +80,18 @@ export interface components {
     PIIAnswers: { [key: string]: components["schemas"]["PIIAnswer"] };
     /** @description Maps ID of the field to the answer by the applicant */
     GrantApplicationFieldAnswers: {
-      pii?: components["schemas"]["PIIAnswers"];
-    } & { [key: string]: components["schemas"]["GrantApplicationFieldAnswer"] };
+      [key: string]: components["schemas"]["GrantApplicationFieldAnswer"];
+    };
     GrantApplicationRequest: {
       grantId: string;
       applicantId: components["schemas"]["OwnerID"];
       fields: components["schemas"]["GrantApplicationFieldAnswers"];
+      pii?: components["schemas"]["PIIAnswers"];
       milestones: components["schemas"]["GrantProposedMilestone"][];
     };
     GrantApplicationUpdate: {
       fields?: components["schemas"]["GrantApplicationFieldAnswers"];
+      pii?: components["schemas"]["PIIAnswers"];
       milestones?: components["schemas"]["GrantProposedMilestone"][];
       feedback?: string;
     };

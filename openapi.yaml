@@ -271,9 +271,6 @@ components:
       description: Maps ID of the field to the answer by the applicant
       additionalProperties:
         $ref: '#/components/schemas/GrantApplicationFieldAnswer'
-      properties:
-        pii:
-          $ref: '#/components/schemas/PIIAnswers'
     GrantApplicationRequest:
       type: object
       additionalProperties: false
@@ -289,6 +286,8 @@ components:
           $ref: "#/components/schemas/OwnerID"
         fields:
           $ref: "#/components/schemas/GrantApplicationFieldAnswers"
+        pii:
+          $ref: '#/components/schemas/PIIAnswers'
         milestones:
           type: array
           maxItems: 100
@@ -300,6 +299,8 @@ components:
       properties:
         fields:
           $ref: "#/components/schemas/GrantApplicationFieldAnswers"
+        pii:
+          $ref: '#/components/schemas/PIIAnswers'
         milestones:
           type: array
           maxItems: 100
