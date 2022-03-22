@@ -454,6 +454,7 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/Address"
+          minItems: 1
     GrantUpdateRequest:
       type: object
       additionalProperties: false
@@ -480,6 +481,7 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/Address"
+          minItems: 1
     OwnerID:
       type: string
       minLength: 16
