@@ -7,6 +7,7 @@ export default {
 	validateGrantCreate: async() => (await import('./validateGrantCreate')).default,
 	validateGrantUpdate: async() => (await import('./validateGrantUpdate')).default,
 	validateReviewSet: async() => (await import('./validateReviewSet')).default,
+	validateRubricSet: async() => (await import('./validateRubricSet')).default,
 	validateWorkspaceCreate: async() => (await import('./validateWorkspaceCreate')).default,
 	validateWorkspaceUpdate: async() => (await import('./validateWorkspaceUpdate')).default,
 }
