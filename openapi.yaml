@@ -135,6 +135,24 @@ paths:
           $ref: '#/components/responses/ErrorResponse'
         '500':
           $ref: '#/components/responses/ErrorResponse'
+  /validate/review-set:
+    post:
+      operationId: validateReviewSet
+      summary: Set the review for an application
+      tags:
+        - Validation
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReviewSetRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/ValidationSuccessResponse'
+        '400':
+          $ref: '#/components/responses/ErrorResponse'
+        '500':
+          $ref: '#/components/responses/ErrorResponse'
 components:
   schemas:
     Error:
@@ -414,6 +432,51 @@ components:
             $ref: "#/components/schemas/Amount"
         asset:
           $ref: "#/components/schemas/Address"
+    ReviewItem:
+      type: object
+      required:
+        - rating
+      properties:
+        rating:
+          type: integer
+          minimum: 0
+        note:
+          type: string
+          description: Content or IPFS hash of the review note
+          maxLength: 7000
+    Review:
+      type: object
+      additionalProperties:
+        $ref: "#/components/schemas/ReviewItem"
+    ReviewSetRequest:
+      type: object
+      properties:
+        reviewer:
+          $ref: '#/components/schemas/Address'
+        encryptedReview:
+          type: object
+          description: Encrypted review data. Map of the grant manager address => IPFS hash of the review encrypted with their public key
+          additionalProperties:
+            type: string
+            maxLength: 255
+    RubricItem:
+      type: object
+      additionalProperties: false
+      required:
+        - title
+      properties:
+        title:
+          type: string
+          maxLength: 1024
+        details:
+          type: string
+          description: Details about the evaluatation rubric
+          maxLength: 4096
+    Rubric:
+      type: object
+      description: Map of evaluation rubric ID to rubric data
+      additionalProperties:
+        $ref: "#/components/schemas/RubricItem"
     GrantCreateRequest:
       type: object
       additionalProperties: false
@@ -455,6 +518,8 @@ components:
           items:
             $ref: "#/components/schemas/Address"
           minItems: 1
+        rubric:
+          $ref: "#/components/schemas/Rubric"
     GrantUpdateRequest:
       type: object
       additionalProperties: false
@@ -482,6 +547,8 @@ components:
           items:
             $ref: "#/components/schemas/Address"
           minItems: 1
+        rubric:
+          $ref: "#/components/schemas/Rubric"
     OwnerID:
       type: string
       minLength: 16

@@ -25,6 +25,9 @@ export interface paths {
   "/validate/application-milestone-update": {
     post: operations["validateApplicationMilestoneUpdate"];
   };
+  "/validate/review-set": {
+    post: operations["validateReviewSet"];
+  };
 }
 
 export interface components {
@@ -134,6 +137,24 @@ export interface components {
       committed: components["schemas"]["Amount"];
       asset: components["schemas"]["Address"];
     };
+    RubricItem: {
+      title: string;
+      /** @description Details about the evaluatation rubric */
+      details?: string;
+    };
+    ReviewItem: {
+      rating: number;
+      /** @description Content or IPFS hash of the review note */
+      note?: string;
+    };
+    Review: { [key: string]: components["schemas"]["ReviewItem"] };
+    ReviewSetRequest: {
+      reviewer?: components["schemas"]["Address"];
+      /** @description Encrypted review data. Map of the grant manager address => IPFS hash of the review encrypted with their public key */
+      encryptedReview?: { [key: string]: string };
+    };
+    /** @description Map of evaluation rubric ID to rubric data */
+    Rubric: { [key: string]: components["schemas"]["RubricItem"] };
     GrantCreateRequest: {
       title: string;
       summary: string;
@@ -149,6 +170,7 @@ export interface components {
       workspaceId: string;
       fields: components["schemas"]["GrantFieldMap"];
       grantManagers?: components["schemas"]["Address"][];
+      rubric?: components["schemas"]["Rubric"];
     };
     GrantUpdateRequest: {
       title?: string;
@@ -162,6 +184,7 @@ export interface components {
       reward?: components["schemas"]["GrantReward"];
       fields?: components["schemas"]["GrantFieldMap"];
       grantManagers?: components["schemas"]["Address"][];
+      rubric?: components["schemas"]["Rubric"];
     };
     /** @example 0x71C7656EC7ab88b098defB751B7411C5f6d8976F */
     OwnerID: string;
@@ -275,6 +298,18 @@ export interface operations {
     requestBody: {
       content: {
         "application/json": components["schemas"]["ApplicationMilestoneUpdate"];
+      };
+    };
+  };
+  validateReviewSet: {
+    responses: {
+      200: components["responses"]["ValidationSuccessResponse"];
+      400: components["responses"]["ErrorResponse"];
+      500: components["responses"]["ErrorResponse"];
+    };
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["ReviewSetRequest"];
       };
     };
   };
