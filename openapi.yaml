@@ -450,6 +450,9 @@ components:
         $ref: "#/components/schemas/ReviewItem"
     ReviewSetRequest:
       type: object
+      required:
+        - reviewer
+        - encryptedReview
       properties:
         reviewer:
           $ref: '#/components/schemas/Address'
