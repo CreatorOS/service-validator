@@ -1,6 +1,6 @@
 import { Chance } from 'chance'
 import request from 'supertest'
-import { IGrantApplicationRequest, IGrantCreateRequest, IGrantField, IWorkspaceCreateRequest, IWorkspaceUpdateRequest } from '../types'
+import { IGrantApplicationRequest, IGrantCreateRequest, IGrantField, IReviewSetRequest, IWorkspaceCreateRequest, IWorkspaceUpdateRequest } from '../types'
 import { Response } from '../utils/make-api'
 import { describeWithApp } from './test-setup'
 
@@ -72,6 +72,15 @@ describeWithApp('Validation Tests', app => {
 				.post('/validate/grant-create')
 				.send(appl)
 				.expect(400)
+		}
+	})
+
+	it('should successfully upload a review', async() => {
+		for(const appl of PASS_REVIEWS) {
+			await request(app)
+				.post('/validate/review-set')
+				.send(appl)
+				.expect(200)
 		}
 	})
 
@@ -267,4 +276,14 @@ const PASS_WORKSPACE_UPDATES: IWorkspaceUpdateRequest[] = [
 			{ name: 'discord', value: chance.url() }
 		]
 	},
+]
+
+const PASS_REVIEWS: IReviewSetRequest[] = [
+	{
+		reviewer: chance.guid(),
+		encryptedReview: {
+			[chance.guid()]: chance.guid(),
+			[chance.guid()]: chance.guid()
+		}
+	}
 ]

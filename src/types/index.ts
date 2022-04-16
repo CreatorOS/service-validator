@@ -7,3 +7,5 @@ export type IWorkspaceCreateRequest = components['schemas']['WorkspaceCreateRequ
 export type IWorkspaceUpdateRequest = components['schemas']['WorkspaceUpdateRequest']
 export type IGrantApplicationRequest = components['schemas']['GrantApplicationRequest']
 export type IGrantApplicationUpdateRequest = components['schemas']['GrantApplicationUpdate']
+export type IReviewSetRequest = components['schemas']['ReviewSetRequest']
+export type IRubricSetRequest = components['schemas']['RubricSetRequest']
