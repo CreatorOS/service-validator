@@ -1,6 +1,6 @@
 import { Chance } from 'chance'
 import request from 'supertest'
-import { IGrantApplicationRequest, IGrantCreateRequest, IGrantField, IReviewSetRequest, IWorkspaceCreateRequest, IWorkspaceUpdateRequest } from '../types'
+import { IGrantApplicationRequest, IGrantCreateRequest, IGrantField, IReviewSetRequest, IRubricSetRequest, IWorkspaceCreateRequest, IWorkspaceUpdateRequest } from '../types'
 import { Response } from '../utils/make-api'
 import { describeWithApp } from './test-setup'
 
@@ -79,6 +79,15 @@ describeWithApp('Validation Tests', app => {
 		for(const appl of PASS_REVIEWS) {
 			await request(app)
 				.post('/validate/review-set')
+				.send(appl)
+				.expect(200)
+		}
+	})
+
+	it('should successfully upload a rubric', async() => {
+		for(const appl of PASS_RUBRICS) {
+			await request(app)
+				.post('/validate/rubric-set')
 				.send(appl)
 				.expect(200)
 		}
@@ -284,6 +293,21 @@ const PASS_REVIEWS: IReviewSetRequest[] = [
 		encryptedReview: {
 			[chance.guid()]: chance.guid(),
 			[chance.guid()]: chance.guid()
+		}
+	}
+]
+
+const PASS_RUBRICS: IRubricSetRequest[] = [
+	{
+		rubric: {
+			quality: {
+				title: 'Quality of the app',
+				details: 'Judge, like, the quality of the application'
+			},
+			name: {
+				title: 'Name of the application',
+				details: 'Judge how cool the application name is'
+			}
 		}
 	}
 ]
