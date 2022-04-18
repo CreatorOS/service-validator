@@ -486,6 +486,7 @@ components:
       additionalProperties: false
       required:
         - title
+        - maximumPoints
       properties:
         title:
           type: string
@@ -494,6 +495,10 @@ components:
           type: string
           description: Details about the evaluatation rubric
           maxLength: 4096
+        maximumPoints:
+          type: integer
+          minimum: 1
+          maximum: 10
     Rubric:
       type: object
       description: Map of evaluation rubric ID to rubric data
