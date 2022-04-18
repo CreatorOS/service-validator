@@ -507,7 +507,7 @@ components:
         details:
           type: string
           description: Details about the evaluatation rubric
-          maxLength: 4096
+          maxLength: 6000
         maximumPoints:
           type: integer
           minimum: 1
