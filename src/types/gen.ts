@@ -152,9 +152,16 @@ export interface components {
       /** @description Content or IPFS hash of the review note */
       note?: string;
     };
-    Review: { [key: string]: components["schemas"]["ReviewItem"] };
+    Review: {
+      /** @description Does the reviewer approve of the application */
+      isApproved: boolean;
+      /** @description General comment about the application */
+      comment?: string;
+      evaluation: { [key: string]: components["schemas"]["ReviewItem"] };
+    };
     ReviewSetRequest: {
       reviewer: components["schemas"]["Address"];
+      publicReviewDataHash?: string;
       /** @description Encrypted review data. Map of the grant manager address => IPFS hash of the review encrypted with their public key */
       encryptedReview: { [key: string]: string };
     };
@@ -162,9 +169,13 @@ export interface components {
       title: string;
       /** @description Details about the evaluatation rubric */
       details?: string;
+      maximumPoints: number;
     };
     /** @description Map of evaluation rubric ID to rubric data */
-    Rubric: { [key: string]: components["schemas"]["RubricItem"] };
+    Rubric: {
+      isPrivate: boolean;
+      rubric: { [key: string]: components["schemas"]["RubricItem"] };
+    };
     RubricSetRequest: {
       rubric: components["schemas"]["Rubric"];
     };

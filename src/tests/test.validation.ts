@@ -300,13 +300,18 @@ const PASS_REVIEWS: IReviewSetRequest[] = [
 const PASS_RUBRICS: IRubricSetRequest[] = [
 	{
 		rubric: {
-			quality: {
-				title: 'Quality of the app',
-				details: 'Judge, like, the quality of the application'
-			},
-			name: {
-				title: 'Name of the application',
-				details: 'Judge how cool the application name is'
+			isPrivate: true,
+			rubric: {
+				quality: {
+					maximumPoints: 10,
+					title: 'Quality of the app',
+					details: 'Judge, like, the quality of the application'
+				},
+				name: {
+					maximumPoints: 5,
+					title: 'Name of the application',
+					details: 'Judge how cool the application name is'
+				}
 			}
 		}
 	}
