@@ -515,8 +515,16 @@ components:
     Rubric:
       type: object
       description: Map of evaluation rubric ID to rubric data
-      additionalProperties:
-        $ref: "#/components/schemas/RubricItem"
+      required:
+        - isPrivate
+        - rubric
+      properties:
+        isPrivate:
+          type: boolean
+        rubric:
+          type: object
+          additionalProperties:
+            $ref: "#/components/schemas/RubricItem"
     RubricSetRequest:
       type: object
       additionalProperties: false
