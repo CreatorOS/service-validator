@@ -488,6 +488,9 @@ components:
       properties:
         reviewer:
           $ref: '#/components/schemas/Address'
+        publicReviewDataHash:
+          type: string
+          maxLength: 255
         encryptedReview:
           type: object
           description: Encrypted review data. Map of the grant manager address => IPFS hash of the review encrypted with their public key
