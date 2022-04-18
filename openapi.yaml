@@ -465,8 +465,21 @@ components:
           maxLength: 7000
     Review:
       type: object
-      additionalProperties:
-        $ref: "#/components/schemas/ReviewItem"
+      required:
+        - isApproved
+        - evaluation
+      properties:
+        isApproved:
+          type: boolean
+          description: Does the reviewer approve of the application
+        comment:
+          type: string
+          description: General comment about the application
+          minLength: 1
+        evaluation:
+          type: object
+          additionalProperties:
+            $ref: "#/components/schemas/ReviewItem"
     ReviewSetRequest:
       type: object
       required:
