@@ -55,7 +55,14 @@ export interface components {
      */
     Amount: string;
     /** @description Chain ID of the network */
-    SupportedNetwork: "1" | "4" | "137" | "80001" | "1666700000" | "1666600000";
+    SupportedNetwork:
+      | "1"
+      | "10"
+      | "4"
+      | "137"
+      | "80001"
+      | "1666700000"
+      | "1666600000";
     GrantField: {
       /** @description Human readable title of the field */
       title: string;

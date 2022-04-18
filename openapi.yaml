@@ -210,6 +210,7 @@ components:
       description: Chain ID of the network
       enum:
         - '1' # ETH mainnet
+        - '10' # Optimism mainnet
         - '4' # Rinkeby testnet
         - '137' # Polygon
         - '80001' # Polygon testnet
