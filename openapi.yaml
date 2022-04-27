@@ -205,6 +205,29 @@ components:
       description: Positive integer amount of currency. Is a string to allow bigint inputs
       format: integer
       maxLength: 64
+    Token:
+      type: object
+      required: 
+        - label
+        - address
+        - decimal
+        - icon
+      properties:
+        label: 
+          description: Token Symbol to be displayed
+          type: string
+          maxLength: 64
+        address:
+          $ref: "#/components/schemas/Address"
+        decimal: 
+          type: string
+          pattern: '/^[1-9][0-9]$'
+          description: Decimal for token
+          format: integer
+          maxLength: 64
+        icon: 
+          type: string
+          description: Token icon IPFS link
     SupportedNetwork:
       type: string
       description: Chain ID of the network
@@ -410,6 +433,10 @@ components:
           maxItems: 10
         publicKey:
           $ref: "#/components/schemas/PublicKey"
+        tokens:
+          type: array
+          items:
+            $ref: "#/components/schemas/Token"
     ApplicationMilestoneUpdate:
       type: object
       additionalProperties: false
