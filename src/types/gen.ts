@@ -64,9 +64,7 @@ export interface components {
        */
       decimal: string;
       /** @description IPFS hash of token icon */
-      iconHash?: string;
-    } & {
-      icon: unknown;
+      iconHash: string;
     };
     /** @description Chain ID of the network */
     SupportedNetwork:
