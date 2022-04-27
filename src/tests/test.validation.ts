@@ -283,6 +283,9 @@ const PASS_WORKSPACE_UPDATES: IWorkspaceUpdateRequest[] = [
 		socials: [
 			{ name: 'twitter', value: chance.url() },
 			{ name: 'discord', value: chance.url() }
+		],
+		tokens: [
+			{ label: 'WMATIC', address: '0x95b58a6bff3d14b7db2f5cb5f0ad413dc2940658', decimal: '18', icon: 'https://ipfs.io/ipfs/QmXoypizjW3WknFiJnKLwHCnL72vedxjQkDDP1mXWo6uco'}
 		]
 	},
 ]
