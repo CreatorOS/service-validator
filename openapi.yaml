@@ -224,10 +224,11 @@ components:
           pattern: '/^[1-9][0-9]$'
           description: Decimal for token
           format: integer
-          maxLength: 64
-        icon: 
+          maxLength: 4
+        iconHash: 
           type: string
-          description: Token icon IPFS link
+          description: IPFS hash of token icon
+          maxLength: 128
     SupportedNetwork:
       type: string
       description: Chain ID of the network
