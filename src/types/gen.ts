@@ -54,6 +54,18 @@ export interface components {
      * @description Positive integer amount of currency. Is a string to allow bigint inputs
      */
     Amount: string;
+    Token: {
+      /** @description Token Symbol to be displayed */
+      label: string;
+      address: components["schemas"]["Address"];
+      /**
+       * Format: integer
+       * @description Decimal for token
+       */
+      decimal: string;
+      /** @description IPFS hash of token icon */
+      iconHash: string;
+    };
     /** @description Chain ID of the network */
     SupportedNetwork:
       | "1"
@@ -132,6 +144,7 @@ export interface components {
       coverImageIpfsHash?: string;
       socials?: components["schemas"]["SocialItem"][];
       publicKey?: components["schemas"]["PublicKey"];
+      tokens?: components["schemas"]["Token"][];
     };
     ApplicationMilestoneUpdate: {
       text: string;
