@@ -159,6 +159,7 @@ export interface components {
     GrantReward: {
       committed: components["schemas"]["Amount"];
       asset: components["schemas"]["Address"];
+      token?: components["schemas"]["Token"];
     };
     ReviewItem: {
       rating: number;

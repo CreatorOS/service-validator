@@ -172,7 +172,13 @@ const PASS_GRANTS: IGrantCreateRequest[] = [
 		details: chance.paragraph(),
 		reward: {
 			committed: '100',
-			asset: '0xA0A2BC123456643222323232323292'
+			asset: '0xA0A2BC123456643222323232323292',
+			token: {
+				label: 'WMATIC',
+				address: '0xA0A2BC123456643222323232323292',
+				decimal: '18',
+				iconHash: 'QmXoypizjW3WknFiJnKLwHCnL72vedxjQkDDP1mXWo6uco'
+			}
 		},
 		creatorId: chance.guid(),
 		workspaceId: chance.guid(),
