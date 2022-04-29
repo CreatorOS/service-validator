@@ -173,7 +173,7 @@ const PASS_GRANTS: IGrantCreateRequest[] = [
 		reward: {
 			committed: '100',
 			asset: '0xA0A2BC123456643222323232323292',
-			rewardToken: {
+			token: {
 				label: 'WMATIC',
 				address: '0xA0A2BC123456643222323232323292',
 				decimal: '18',

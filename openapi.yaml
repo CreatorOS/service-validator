@@ -479,7 +479,7 @@ components:
             $ref: "#/components/schemas/Amount"
         asset:
           $ref: "#/components/schemas/Address"
-        rewardToken:
+        token:
           $ref: "#/components/schemas/Token"
     ReviewItem:
       type: object
