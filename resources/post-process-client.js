@@ -18,6 +18,7 @@ const PACKAGE_LOCATION = process.env.PACKAGE_LOCATION;
 	// but we need it as a string because the committed number will be larger than a 64 bit unsigned integer
 	apiTsContents = apiTsContents.replace("'committed': number", "'committed': string")
 	apiTsContents = apiTsContents.replace("'amount': number", "'amount': string")
+	apiTsContents = apiTsContents.replace("'decimal': number", "'decimal': string")
 	
 	await writeFile(file, apiTsContents)
 })()
