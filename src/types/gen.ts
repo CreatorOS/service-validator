@@ -62,7 +62,7 @@ export interface components {
        * Format: integer
        * @description Decimal for token
        */
-      decimal: string;
+      decimals: string;
       /** @description IPFS hash of token icon */
       iconHash: string;
     };

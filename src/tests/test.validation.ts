@@ -176,7 +176,7 @@ const PASS_GRANTS: IGrantCreateRequest[] = [
 			token: {
 				label: 'WMATIC',
 				address: '0xA0A2BC123456643222323232323292',
-				decimal: '18',
+				decimals: '18',
 				iconHash: 'QmXoypizjW3WknFiJnKLwHCnL72vedxjQkDDP1mXWo6uco'
 			}
 		},
@@ -291,7 +291,7 @@ const PASS_WORKSPACE_UPDATES: IWorkspaceUpdateRequest[] = [
 			{ name: 'discord', value: chance.url() }
 		],
 		tokens: [
-			{ label: 'WMATIC', address: '0x95b58a6bff3d14b7db2f5cb5f0ad413dc2940658', decimal: '18', iconHash: 'QmXoypizjW3WknFiJnKLwHCnL72vedxjQkDDP1mXWo6uco' },
+			{ label: 'WMATIC', address: '0x95b58a6bff3d14b7db2f5cb5f0ad413dc2940658', decimals: '18', iconHash: 'QmXoypizjW3WknFiJnKLwHCnL72vedxjQkDDP1mXWo6uco' },
 		]
 	},
 ]
