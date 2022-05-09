@@ -238,6 +238,8 @@ components:
         - '4' # Rinkeby testnet
         - '137' # Polygon
         - '80001' # Polygon testnet
+        - '245022926' # NEON devnet
+        - '245022934' # NEON mainnet
         - '1666700000' # harmony
         - '1666600000' # harmony
     GrantField:
