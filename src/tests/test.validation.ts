@@ -172,11 +172,11 @@ const PASS_GRANTS: IGrantCreateRequest[] = [
 		details: chance.paragraph(),
 		reward: {
 			committed: '100',
-			asset: '0xA0A2BC123456643222323232323292',
+			asset: '0xE3D997D569b5b03B577C6a2Edd1d2613FE776cb0',
 			token: {
-				label: 'WMATIC',
-				address: '0xA0A2BC123456643222323232323292',
-				decimal: '18',
+				label: 'BDEV',
+				address: '0xE3D997D569b5b03B577C6a2Edd1d2613FE776cb0',
+				decimal: '8',
 				iconHash: 'QmXoypizjW3WknFiJnKLwHCnL72vedxjQkDDP1mXWo6uco'
 			}
 		},
@@ -291,7 +291,7 @@ const PASS_WORKSPACE_UPDATES: IWorkspaceUpdateRequest[] = [
 			{ name: 'discord', value: chance.url() }
 		],
 		tokens: [
-			{ label: 'WMATIC', address: '0x95b58a6bff3d14b7db2f5cb5f0ad413dc2940658', decimal: '18', iconHash: 'QmXoypizjW3WknFiJnKLwHCnL72vedxjQkDDP1mXWo6uco' },
+			{ label: 'BDEV', address: '0xE3D997D569b5b03B577C6a2Edd1d2613FE776cb0', decimal: '8', iconHash: 'QmXoypizjW3WknFiJnKLwHCnL72vedxjQkDDP1mXWo6uco' },
 		]
 	},
 ]
