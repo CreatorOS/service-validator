@@ -240,6 +240,8 @@ components:
         - '80001' # Polygon testnet
         - '245022926' # NEON devnet
         - '245022934' # NEON mainnet
+        - '44787' # Celo Alfajores Testnet
+        - '42220' # Celo Mainnet
         - '1666700000' # harmony
         - '1666600000' # harmony
     GrantField:
