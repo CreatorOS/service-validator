@@ -201,31 +201,31 @@ components:
       format: hex
     Amount:
       type: string
-      pattern: '^[0-9]{1,64}$'
+      pattern: ^[0-9]{1,64}$
       description: Positive integer amount of currency. Is a string to allow bigint inputs
       format: integer
       maxLength: 64
     Token:
       type: object
-      required: 
+      required:
         - label
         - address
         - decimal
         - iconHash
       properties:
-        label: 
+        label:
           description: Token Symbol to be displayed
           type: string
           maxLength: 64
         address:
-          $ref: "#/components/schemas/Address"
-        decimal: 
+          $ref: '#/components/schemas/Address'
+        decimal:
           type: string
-          pattern: '^[1-9][0-9]{0,2}'
+          pattern: ^[1-9][0-9]{0,2}
           description: Decimal for token
           format: integer
           maxLength: 4
-        iconHash: 
+        iconHash:
           type: string
           description: IPFS hash of token icon
           maxLength: 128
@@ -233,17 +233,14 @@ components:
       type: string
       description: Chain ID of the network
       enum:
-        - '1' # ETH mainnet
-        - '10' # Optimism mainnet
-        - '4' # Rinkeby testnet
-        - '137' # Polygon
-        - '80001' # Polygon testnet
-        - '245022926' # NEON devnet
-        - '245022934' # NEON mainnet
-        - '44787' # Celo Alfajores Testnet
-        - '42220' # Celo Mainnet
-        - '1666700000' # harmony
-        - '1666600000' # harmony
+        - '44787'
+        - '1666700000'
+        - '245022926'
+        - '69'
+        - '10'
+        - '137'
+        - '80001'
+        - '4'
     GrantField:
       type: object
       additionalProperties: false
@@ -270,9 +267,11 @@ components:
             maxLength: 256
           maxItems: 20
         pii:
-          description: Whether this field is PII (personally identifiable information) or not
+          description: >-
+            Whether this field is PII (personally identifiable information) or
+            not
           type: boolean
-          default: false 
+          default: false
     GrantProposedMilestone:
       type: object
       required:
@@ -301,7 +300,7 @@ components:
       required:
         - value
       properties:
-        value: 
+        value:
           type: string
           maxLength: 7000
     PIIAnswer:
@@ -310,7 +309,9 @@ components:
       format: base64
     PIIAnswers:
       type: object
-      description: Map of encrypted information mapped by the wallet ID, whose public key was used to map the specific information
+      description: >-
+        Map of encrypted information mapped by the wallet ID, whose public key
+        was used to map the specific information
       additionalProperties:
         $ref: '#/components/schemas/PIIAnswer'
     GrantApplicationFieldAnswers:
@@ -330,29 +331,29 @@ components:
         grantId:
           type: string
         applicantId:
-          $ref: "#/components/schemas/OwnerID"
+          $ref: '#/components/schemas/OwnerID'
         fields:
-          $ref: "#/components/schemas/GrantApplicationFieldAnswers"
+          $ref: '#/components/schemas/GrantApplicationFieldAnswers'
         pii:
           $ref: '#/components/schemas/PIIAnswers'
         milestones:
           type: array
           maxItems: 100
           items:
-            $ref: "#/components/schemas/GrantProposedMilestone"
+            $ref: '#/components/schemas/GrantProposedMilestone'
     GrantApplicationUpdate:
       type: object
       additionalProperties: false
       properties:
         fields:
-          $ref: "#/components/schemas/GrantApplicationFieldAnswers"
+          $ref: '#/components/schemas/GrantApplicationFieldAnswers'
         pii:
           $ref: '#/components/schemas/PIIAnswers'
         milestones:
           type: array
           maxItems: 100
           items:
-            $ref: "#/components/schemas/GrantProposedMilestone"
+            $ref: '#/components/schemas/GrantProposedMilestone'
         feedback:
           type: string
           minLength: 1
@@ -396,18 +397,18 @@ components:
           description: IPFS hash of the cover of the workspace
           maxLength: 128
         creatorId:
-          $ref: "#/components/schemas/OwnerID"
+          $ref: '#/components/schemas/OwnerID'
         creatorPublicKey:
-          $ref: "#/components/schemas/PublicKey"
+          $ref: '#/components/schemas/PublicKey'
         supportedNetworks:
           type: array
           maxItems: 25
           items:
-            $ref: "#/components/schemas/SupportedNetwork"
+            $ref: '#/components/schemas/SupportedNetwork'
         socials:
           type: array
           items:
-            $ref: "#/components/schemas/SocialItem"
+            $ref: '#/components/schemas/SocialItem'
           maxItems: 10
     PublicKey:
       description: The public encryption key associated with the account address
@@ -434,14 +435,14 @@ components:
         socials:
           type: array
           items:
-            $ref: "#/components/schemas/SocialItem"
+            $ref: '#/components/schemas/SocialItem'
           maxItems: 10
         publicKey:
-          $ref: "#/components/schemas/PublicKey"
+          $ref: '#/components/schemas/PublicKey'
         tokens:
           type: array
           items:
-            $ref: "#/components/schemas/Token"
+            $ref: '#/components/schemas/Token'
     ApplicationMilestoneUpdate:
       type: object
       additionalProperties: false
@@ -454,7 +455,7 @@ components:
     GrantFieldMap:
       type: object
       additionalProperties:
-        $ref: "#/components/schemas/GrantField"
+        $ref: '#/components/schemas/GrantField'
       required:
         - applicantName
         - applicantEmail
@@ -463,15 +464,15 @@ components:
         - fundingBreakdown
       properties:
         applicantName:
-          $ref: "#/components/schemas/GrantField"
+          $ref: '#/components/schemas/GrantField'
         applicantEmail:
-          $ref: "#/components/schemas/GrantField"
+          $ref: '#/components/schemas/GrantField'
         projectName:
-          $ref: "#/components/schemas/GrantField"
+          $ref: '#/components/schemas/GrantField'
         projectDetails:
-          $ref: "#/components/schemas/GrantField"
+          $ref: '#/components/schemas/GrantField'
         fundingBreakdown:
-          $ref: "#/components/schemas/GrantField"
+          $ref: '#/components/schemas/GrantField'
     GrantReward:
       type: object
       additionalProperties: false
@@ -480,11 +481,11 @@ components:
         - committed
       properties:
         committed:
-            $ref: "#/components/schemas/Amount"
+          $ref: '#/components/schemas/Amount'
         asset:
-          $ref: "#/components/schemas/Address"
+          $ref: '#/components/schemas/Address'
         token:
-          $ref: "#/components/schemas/Token"
+          $ref: '#/components/schemas/Token'
     ReviewItem:
       type: object
       required:
@@ -513,7 +514,7 @@ components:
         evaluation:
           type: object
           additionalProperties:
-            $ref: "#/components/schemas/ReviewItem"
+            $ref: '#/components/schemas/ReviewItem'
     ReviewSetRequest:
       type: object
       required:
@@ -527,7 +528,9 @@ components:
           maxLength: 255
         encryptedReview:
           type: object
-          description: Encrypted review data. Map of the grant manager address => IPFS hash of the review encrypted with their public key
+          description: >-
+            Encrypted review data. Map of the grant manager address => IPFS hash
+            of the review encrypted with their public key
           additionalProperties:
             type: string
             maxLength: 255
@@ -561,7 +564,7 @@ components:
         rubric:
           type: object
           additionalProperties:
-            $ref: "#/components/schemas/RubricItem"
+            $ref: '#/components/schemas/RubricItem'
     RubricSetRequest:
       type: object
       additionalProperties: false
@@ -569,7 +572,7 @@ components:
         - rubric
       properties:
         rubric:
-          $ref: "#/components/schemas/Rubric"
+          $ref: '#/components/schemas/Rubric'
     GrantCreateRequest:
       type: object
       additionalProperties: false
@@ -597,19 +600,19 @@ components:
           description: Deadline of the application
           maxLength: 128
         reward:
-          $ref: "#/components/schemas/GrantReward"
+          $ref: '#/components/schemas/GrantReward'
         creatorId:
-          $ref: "#/components/schemas/OwnerID"
+          $ref: '#/components/schemas/OwnerID'
         workspaceId:
           type: string
           description: the workspace the grant is from
           maxLength: 128
         fields:
-          $ref: "#/components/schemas/GrantFieldMap"
+          $ref: '#/components/schemas/GrantFieldMap'
         grantManagers:
           type: array
           items:
-            $ref: "#/components/schemas/Address"
+            $ref: '#/components/schemas/Address'
           minItems: 1
     GrantUpdateRequest:
       type: object
@@ -630,13 +633,13 @@ components:
           description: Deadline of the application
           maxLength: 128
         reward:
-          $ref: "#/components/schemas/GrantReward"
+          $ref: '#/components/schemas/GrantReward'
         fields:
-          $ref: "#/components/schemas/GrantFieldMap"
+          $ref: '#/components/schemas/GrantFieldMap'
         grantManagers:
           type: array
           items:
-            $ref: "#/components/schemas/Address"
+            $ref: '#/components/schemas/Address'
           minItems: 1
     OwnerID:
       type: string
@@ -662,10 +665,11 @@ components:
               url:
                 type: string
                 description: http url that can be used to fetch the uploaded grant file
-                example: https://ipfs.io/ipfs/QmXoypizjW3WknFiJnKLwHCnL72vedxjQkDDP1mXWo6uco
+                example: >-
+                  https://ipfs.io/ipfs/QmXoypizjW3WknFiJnKLwHCnL72vedxjQkDDP1mXWo6uco
     ErrorResponse:
       description: Generic error response
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/Error"
+            $ref: '#/components/schemas/Error'

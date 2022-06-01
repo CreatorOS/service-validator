@@ -68,17 +68,14 @@ export interface components {
     };
     /** @description Chain ID of the network */
     SupportedNetwork:
-      | "1"
+      | "44787"
+      | "1666700000"
+      | "245022926"
+      | "69"
       | "10"
-      | "4"
       | "137"
       | "80001"
-      | "245022926"
-      | "245022934"
-      | "44787"
-      | "42220"
-      | "1666700000"
-      | "1666600000";
+      | "4";
     GrantField: {
       /** @description Human readable title of the field */
       title: string;
