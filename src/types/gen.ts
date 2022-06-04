@@ -66,6 +66,13 @@ export interface components {
       /** @description IPFS hash of token icon */
       iconHash: string;
     };
+    /** @description Workspace partners */
+    Partners: {
+      name: string;
+      industry?: string;
+      website?: string;
+      imageIpfsHash?: string;
+    }
     /** @description Chain ID of the network */
     SupportedNetwork:
       | "44787"
@@ -124,6 +131,7 @@ export interface components {
     };
     WorkspaceCreateRequest: {
       title: string;
+      bio: string;
       about: string;
       /** @description IPFS hash of the logo of the workspace */
       logoIpfsHash: string;
@@ -132,17 +140,20 @@ export interface components {
       creatorId: components["schemas"]["OwnerID"];
       creatorPublicKey?: components["schemas"]["PublicKey"];
       supportedNetworks: components["schemas"]["SupportedNetwork"][];
+      partners?: components["schemas"]["Partners"];
       socials: components["schemas"]["SocialItem"][];
     };
     /** @description The public encryption key associated with the account address */
     PublicKey: string;
     WorkspaceUpdateRequest: {
       title?: string;
+      bio?: string;
       about?: string;
       /** @description IPFS hash of the logo of the workspace */
       logoIpfsHash?: string;
       /** @description IPFS hash of the cover of the workspace */
       coverImageIpfsHash?: string;
+      partners?: components["schemas"]["Partners"];
       socials?: components["schemas"]["SocialItem"][];
       publicKey?: components["schemas"]["PublicKey"];
       tokens?: components["schemas"]["Token"][];
