@@ -217,10 +217,12 @@ const PASS_GRANTS: IGrantCreateRequest[] = [
 const PASS_WORKSPACES: IWorkspaceCreateRequest[] = [
 	{
 		title: chance.sentence(),
+		bio: chance.sentence(),
 		about: chance.paragraph(),
 		logoIpfsHash: chance.guid(),
 		coverImageIpfsHash: chance.guid(),
 		creatorId: chance.guid(),
+		partners: {name: '', industry: '', website: '', partnerImageHash: ''},
 		supportedNetworks: ['4'],
 		socials: [
 			{ name: 'twitter', value: chance.url() },
@@ -286,6 +288,7 @@ const PASS_WORKSPACE_UPDATES: IWorkspaceUpdateRequest[] = [
 		about: chance.paragraph(),
 		logoIpfsHash: chance.guid(),
 		coverImageIpfsHash: chance.guid(),
+		partners: {name: '', industry: '', website: '', partnerImageHash: ''},
 		socials: [
 			{ name: 'twitter', value: chance.url() },
 			{ name: 'discord', value: chance.url() }
