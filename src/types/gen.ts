@@ -54,6 +54,16 @@ export interface components {
      * @description Positive integer amount of currency. Is a string to allow bigint inputs
      */
     Amount: string;
+    Partners: {
+      /** @description Partner name */
+      name?: string;
+      /** @description Partner industry */
+      industry?: string;
+      /** @description Partner website */
+      website?: string;
+      /** @description IPFS hash of partner picture */
+      partnerImageHash?: string;
+    };
     Token: {
       /** @description Token Symbol to be displayed */
       label: string;
@@ -66,13 +76,6 @@ export interface components {
       /** @description IPFS hash of token icon */
       iconHash: string;
     };
-    /** @description Workspace partners */
-    Partners: {
-      name: string;
-      industry?: string;
-      website?: string;
-      imageIpfsHash?: string;
-    }
     /** @description Chain ID of the network */
     SupportedNetwork:
       | "44787"
@@ -137,10 +140,10 @@ export interface components {
       logoIpfsHash: string;
       /** @description IPFS hash of the cover of the workspace */
       coverImageIpfsHash?: string;
+      partners?: components["schemas"]["Partners"];
       creatorId: components["schemas"]["OwnerID"];
       creatorPublicKey?: components["schemas"]["PublicKey"];
       supportedNetworks: components["schemas"]["SupportedNetwork"][];
-      partners?: components["schemas"]["Partners"];
       socials: components["schemas"]["SocialItem"][];
     };
     /** @description The public encryption key associated with the account address */
@@ -153,7 +156,6 @@ export interface components {
       logoIpfsHash?: string;
       /** @description IPFS hash of the cover of the workspace */
       coverImageIpfsHash?: string;
-      partners?: components["schemas"]["Partners"];
       socials?: components["schemas"]["SocialItem"][];
       publicKey?: components["schemas"]["PublicKey"];
       tokens?: components["schemas"]["Token"][];
