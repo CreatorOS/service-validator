@@ -56,9 +56,9 @@ export interface components {
     Amount: string;
     Partners: {
       /** @description Partner name */
-      name?: string;
+      name: string;
       /** @description Partner industry */
-      industry?: string;
+      industry: string;
       /** @description Partner website */
       website?: string;
       /** @description IPFS hash of partner picture */
@@ -134,13 +134,13 @@ export interface components {
     };
     WorkspaceCreateRequest: {
       title: string;
-      bio: string;
+      bio?: string;
       about: string;
+      partners?: components["schemas"]["Partners"];
       /** @description IPFS hash of the logo of the workspace */
       logoIpfsHash: string;
       /** @description IPFS hash of the cover of the workspace */
       coverImageIpfsHash?: string;
-      partners?: components["schemas"]["Partners"];
       creatorId: components["schemas"]["OwnerID"];
       creatorPublicKey?: components["schemas"]["PublicKey"];
       supportedNetworks: components["schemas"]["SupportedNetwork"][];
@@ -154,6 +154,7 @@ export interface components {
       about?: string;
       /** @description IPFS hash of the logo of the workspace */
       logoIpfsHash?: string;
+      partners?: components["schemas"]["Partners"];
       /** @description IPFS hash of the cover of the workspace */
       coverImageIpfsHash?: string;
       socials?: components["schemas"]["SocialItem"][];

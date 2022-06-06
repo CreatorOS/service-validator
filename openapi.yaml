@@ -207,6 +207,9 @@ components:
       maxLength: 64
     Partners:
       type: object
+      required:
+        - name
+        - industry
       properties:
         name:
           description: Partner name
@@ -395,7 +398,6 @@ components:
       additionalProperties: false
       required:
         - title
-        - bio
         - about
         - logoIpfsHash
         - creatorId
@@ -411,6 +413,8 @@ components:
         about:
           type: string
           maxLength: 5000
+        partners:
+          $ref: '#/components/schemas/Partners'
         logoIpfsHash:
           type: string
           description: IPFS hash of the logo of the workspace
@@ -419,8 +423,6 @@ components:
           type: string
           description: IPFS hash of the cover of the workspace
           maxLength: 128
-        partners:
-          $ref: '#/components/schemas/Partners'
         creatorId:
           $ref: '#/components/schemas/OwnerID'
         creatorPublicKey:
@@ -456,6 +458,8 @@ components:
           type: string
           description: IPFS hash of the logo of the workspace
           maxLength: 128
+        partners:
+          $ref: '#/components/schemas/Partners'
         coverImageIpfsHash:
           type: string
           description: IPFS hash of the cover of the workspace
