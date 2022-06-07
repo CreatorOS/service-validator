@@ -205,6 +205,28 @@ components:
       description: Positive integer amount of currency. Is a string to allow bigint inputs
       format: integer
       maxLength: 64
+    Partner:
+      type: object
+      required:
+        - name
+        - industry
+      properties:
+        name:
+          description: Partner name
+          type: string
+          maxLength: 64
+        industry:
+          type: string
+          description: Partner industry
+          maxLength: 64
+        website:
+          type: string
+          description: Partner website
+          maxLength: 256
+        partnerImageHash:
+          type: string
+          description: IPFS hash of partner picture
+          maxLength: 128
     Token:
       type: object
       required:
@@ -385,9 +407,16 @@ components:
         title:
           type: string
           maxLength: 128
+        bio:
+          type: string
+          maxLength: 200
         about:
           type: string
           maxLength: 5000
+        partners:
+          type: array
+          items:
+            $ref: '#/components/schemas/Partner'
         logoIpfsHash:
           type: string
           description: IPFS hash of the logo of the workspace
@@ -421,6 +450,9 @@ components:
         title:
           type: string
           maxLength: 128
+        bio:
+          type: string
+          maxLength: 200
         about:
           type: string
           maxLength: 5000
@@ -428,6 +460,10 @@ components:
           type: string
           description: IPFS hash of the logo of the workspace
           maxLength: 128
+        partners:
+          type: array
+          items:
+            $ref: '#/components/schemas/Partner'
         coverImageIpfsHash:
           type: string
           description: IPFS hash of the cover of the workspace
