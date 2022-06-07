@@ -222,7 +222,7 @@ components:
         website:
           type: string
           description: Partner website
-          maxLength: 128
+          maxLength: 256
         partnerImageHash:
           type: string
           description: IPFS hash of partner picture
