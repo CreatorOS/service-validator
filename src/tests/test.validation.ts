@@ -222,7 +222,11 @@ const PASS_WORKSPACES: IWorkspaceCreateRequest[] = [
 		logoIpfsHash: chance.guid(),
 		coverImageIpfsHash: chance.guid(),
 		creatorId: chance.guid(),
-		partners: { name: '', industry: '', website: '', partnerImageHash: '' },
+		partners:
+			[{ name: 'Facebook',
+				industry: 'Social',
+				website: 'http://www.partner.com',
+				partnerImageHash: 'QmXoypizjW3WknFiJnKLwHCnL72vedxjQkDDP1mXWo6uco' }],
 		supportedNetworks: ['4'],
 		socials: [
 			{ name: 'twitter', value: chance.url() },
@@ -288,7 +292,11 @@ const PASS_WORKSPACE_UPDATES: IWorkspaceUpdateRequest[] = [
 		about: chance.paragraph(),
 		logoIpfsHash: chance.guid(),
 		coverImageIpfsHash: chance.guid(),
-		partners: { name: '', industry: '', website: '', partnerImageHash: '' },
+		partners:
+			[{ name: 'Facebook',
+				industry: 'Social',
+				website: 'http://www.partner.com',
+				partnerImageHash: 'QmXoypizjW3WknFiJnKLwHCnL72vedxjQkDDP1mXWo6uco' }],
 		socials: [
 			{ name: 'twitter', value: chance.url() },
 			{ name: 'discord', value: chance.url() }

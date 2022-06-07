@@ -54,7 +54,7 @@ export interface components {
      * @description Positive integer amount of currency. Is a string to allow bigint inputs
      */
     Amount: string;
-    Partners: {
+    Partner: {
       /** @description Partner name */
       name: string;
       /** @description Partner industry */
@@ -136,7 +136,7 @@ export interface components {
       title: string;
       bio?: string;
       about: string;
-      partners?: components["schemas"]["Partners"];
+      partners?: components["schemas"]["Partner"][];
       /** @description IPFS hash of the logo of the workspace */
       logoIpfsHash: string;
       /** @description IPFS hash of the cover of the workspace */
@@ -154,7 +154,7 @@ export interface components {
       about?: string;
       /** @description IPFS hash of the logo of the workspace */
       logoIpfsHash?: string;
-      partners?: components["schemas"]["Partners"];
+      partners?: components["schemas"]["Partner"][];
       /** @description IPFS hash of the cover of the workspace */
       coverImageIpfsHash?: string;
       socials?: components["schemas"]["SocialItem"][];
