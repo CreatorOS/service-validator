@@ -2,7 +2,7 @@ import { Boom } from '@hapi/boom'
 import { File, Web3Storage } from 'web3.storage'
 import logger from './logger'
 
-const token: string = (() => {
+const token = (() => {
 	const { WEB3_STORAGE_API_TOKEN } = process.env
 	if(WEB3_STORAGE_API_TOKEN) {
 		return WEB3_STORAGE_API_TOKEN.toString()
@@ -12,12 +12,17 @@ const token: string = (() => {
 	return ''
 })()
 
+export const getWeb3Client = () => {
+	const storage = new Web3Storage({ token })
+	return storage
+}
+
 export const uploadToIPFS = async(
 	data: string | Buffer,
 	filename: string
 ): Promise<{ hash: string }> => {
 	try {
-		const storage = new Web3Storage({ token })
+		const storage = getWeb3Client()
 		const files: File[] = []
 		const filedata: (string | Buffer)[] = []
 		filedata.push(data)
