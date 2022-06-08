@@ -28,7 +28,7 @@ We're using Node.js + typescript to build this service & is run on a serverless 
 2. The types from the OpenAPI document are then automatically generated using `openapi-typescript`
 3. The server itself is written using an abstraction layer provided by `openapi-backend` that reads the OpenAPI spec & automatically generates the request validators etc. for us
 	- All routes must be contained in the `./src/routes` folder and be named exactly as their operation ID as specified in the OpenAPI doc
-4. The uploads to IPFS along with pinning are done via Infura (see `./src/utils/ipfs.ts`)
+4. The uploads to IPFS along with pinning are done via Web3.Storage (see `./src/utils/ipfs.ts`)
 
 ## Linting
 
