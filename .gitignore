@@ -1,5 +1,6 @@
 .env.production
 .env.development
+.env.test
 .idea
 node_modules
 .build
