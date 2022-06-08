@@ -1,6 +1,6 @@
 service: qb-service-validator
 
-frameworkVersion: "2"
+frameworkVersion: "3"
 useDotenv: true
 
 provider:
