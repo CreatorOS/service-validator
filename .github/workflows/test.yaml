@@ -6,17 +6,14 @@ jobs:
   check-lint:
     runs-on: ubuntu-latest
     timeout-minutes: 10
-    strategy:
-      matrix:
-        node-version: [14.x]
 
     steps:
     - uses: actions/checkout@v2
 
-    - name: Node ${{ matrix.node-version }}
+    - name: Node
       uses: actions/setup-node@v1
       with:
-        node-version: ${{ matrix.node-version }}
+        node-version: 16.x
 
     - name: Install packages
       run: yarn
@@ -27,20 +24,20 @@ jobs:
   test-code:
     runs-on: ubuntu-latest
     timeout-minutes: 10
-    strategy:
-      matrix:
-        node-version: [14.x]
 
     steps:
     - uses: actions/checkout@v2
 
-    - name: Node ${{ matrix.node-version }}
+    - name: Node
       uses: actions/setup-node@v1
       with:
-        node-version: ${{ matrix.node-version }}
+        node-version: 16.x
 
     - name: Install packages
       run: yarn
+      
+    - name: Copy test env
+      run: 'echo -e "${{secrets.ENV_TEST}}" > .env.test'
     
     - name: Run Tests
       run: yarn test
