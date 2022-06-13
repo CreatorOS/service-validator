@@ -1,6 +1,11 @@
-import dotenv from 'dotenv'
+import logger from './logger'
 
 export default () => {
-	const env = process.env.NODE_ENV || 'development'
-	dotenv.config({ path: `.env.${env}` })
+	try {
+		const dotenv = require('dotenv')
+		const env = process.env.NODE_ENV || 'development'
+		dotenv.config({ path: `.env.${env}` })
+	} catch(error) {
+		logger.debug('dotenv not found, did not load from file')
+	}
 }
