@@ -35,6 +35,9 @@ jobs:
 
     - name: Install packages
       run: yarn
+      
+    - name: Copy test env
+      run: 'echo -e "${{secrets.ENV_TEST}}" > .env.test'
     
     - name: Run Tests
       run: yarn test
