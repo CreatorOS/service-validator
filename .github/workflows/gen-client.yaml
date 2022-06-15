@@ -40,7 +40,7 @@ jobs:
         run: |
           mkdir /tmp/git-bkp
           mv /tmp/generated/.git /tmp/git-bkp/
-          rm -r /tmp/generated/*
+          rm -rf /tmp/generated/*
           mv /tmp/git-bkp/.git /tmp/generated/
      
       - name: Generate package
