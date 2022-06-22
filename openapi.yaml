@@ -256,6 +256,7 @@ components:
       description: Chain ID of the network
       enum:
         - '44787'
+        - '2153'
         - '1666600000'
         - '1666700000'
         - '8217'
