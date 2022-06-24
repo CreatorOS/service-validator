@@ -221,7 +221,7 @@ const PASS_WORKSPACES: IWorkspaceCreateRequest[] = [
 		logoIpfsHash: chance.guid(),
 		coverImageIpfsHash: chance.guid(),
 		creatorId: chance.guid(),
-		supportedNetworks: ['1'],
+		supportedNetworks: ['10'],
 		socials: [
 			{ name: 'twitter', value: chance.url() },
 			{ name: 'discord', value: chance.url() }
