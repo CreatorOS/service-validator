@@ -470,8 +470,6 @@ components:
           $ref: '#/components/schemas/GrantField'
         projectDetails:
           $ref: '#/components/schemas/GrantField'
-        fundingBreakdown:
-          $ref: '#/components/schemas/GrantField'
     GrantReward:
       type: object
       additionalProperties: false
