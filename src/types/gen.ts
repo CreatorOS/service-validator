@@ -54,6 +54,16 @@ export interface components {
      * @description Positive integer amount of currency. Is a string to allow bigint inputs
      */
     Amount: string;
+    Partner: {
+      /** @description Partner name */
+      name: string;
+      /** @description Partner industry */
+      industry: string;
+      /** @description Partner website */
+      website?: string;
+      /** @description IPFS hash of partner picture */
+      partnerImageHash?: string;
+    };
     Token: {
       /** @description Token Symbol to be displayed */
       label: string;
@@ -69,7 +79,12 @@ export interface components {
     /** @description Chain ID of the network */
     SupportedNetwork:
       | "44787"
+      | "2153"
+      | "1666600000"
       | "1666700000"
+      | "8217"
+      | "1001"
+      | "42"
       | "245022926"
       | "69"
       | "10"
@@ -124,7 +139,9 @@ export interface components {
     };
     WorkspaceCreateRequest: {
       title: string;
+      bio?: string;
       about: string;
+      partners?: components["schemas"]["Partner"][];
       /** @description IPFS hash of the logo of the workspace */
       logoIpfsHash: string;
       /** @description IPFS hash of the cover of the workspace */
@@ -138,9 +155,11 @@ export interface components {
     PublicKey: string;
     WorkspaceUpdateRequest: {
       title?: string;
+      bio?: string;
       about?: string;
       /** @description IPFS hash of the logo of the workspace */
       logoIpfsHash?: string;
+      partners?: components["schemas"]["Partner"][];
       /** @description IPFS hash of the cover of the workspace */
       coverImageIpfsHash?: string;
       socials?: components["schemas"]["SocialItem"][];

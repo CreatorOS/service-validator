@@ -1,4 +1,5 @@
 {
     "npmName": "@questbook/service-validator-client",
-    "legacyDiscriminatorBehavior": false
+    "legacyDiscriminatorBehavior": false,
+    "stringEnums": true
 }

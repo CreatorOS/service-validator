@@ -17,7 +17,7 @@ async function makeUploaderFunction<T extends Operation>(operation: T) {
 			// stringify the grant & push to IPFS
 			const result = await uploadToIPFS(
 				JSON.stringify(fullData), 
-				{ contentType: 'application/json', filename: `qb-${operation}-${createdAt.getTime()}.json` }
+				`qb-${operation}-${createdAt.getTime()}.json`
 			)
 			hash = result.hash
 		}
