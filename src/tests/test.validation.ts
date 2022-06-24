@@ -222,12 +222,14 @@ const PASS_WORKSPACES: IWorkspaceCreateRequest[] = [
 		logoIpfsHash: chance.guid(),
 		coverImageIpfsHash: chance.guid(),
 		creatorId: chance.guid(),
-    partners:
-              [{ name: 'Facebook',
-                    industry: 'Social',
-                    website: 'http://www.partner.com',
-                    partnerImageHash: 'QmXoypizjW3WknFiJnKLwHCnL72vedxjQkDDP1mXWo6uco' }],
-                supportedNetworks: ['4'],        
+		partners:
+			[{
+				name: 'Facebook',
+				industry: 'Social',
+				website: 'http://www.partner.com',
+				partnerImageHash: 'QmXoypizjW3WknFiJnKLwHCnL72vedxjQkDDP1mXWo6uco'
+			}],
+		supportedNetworks: ['4'],
 		socials: [
 			{ name: 'twitter', value: chance.url() },
 			{ name: 'discord', value: chance.url() }
@@ -274,7 +276,7 @@ const PASS_GRANT_APPLICATIONS: IGrantApplicationRequest[] = [
 							value: chance.sentence(),
 						})
 					),
-				}), { }
+				}), {}
 			)
 		},
 		milestones: [...Array(5)].map(
@@ -293,10 +295,12 @@ const PASS_WORKSPACE_UPDATES: IWorkspaceUpdateRequest[] = [
 		logoIpfsHash: chance.guid(),
 		coverImageIpfsHash: chance.guid(),
 		partners:
-			[{ name: 'Facebook',
+			[{
+				name: 'Facebook',
 				industry: 'Social',
 				website: 'http://www.partner.com',
-				partnerImageHash: 'QmXoypizjW3WknFiJnKLwHCnL72vedxjQkDDP1mXWo6uco' }],
+				partnerImageHash: 'QmXoypizjW3WknFiJnKLwHCnL72vedxjQkDDP1mXWo6uco'
+			}],
 		socials: [
 			{ name: 'twitter', value: chance.url() },
 			{ name: 'discord', value: chance.url() }
