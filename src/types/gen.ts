@@ -155,7 +155,7 @@ export interface components {
       applicantEmail: components["schemas"]["GrantField"];
       projectName: components["schemas"]["GrantField"];
       projectDetails: components["schemas"]["GrantField"];
-      fundingBreakdown: components["schemas"]["GrantField"];
+      fundingBreakdown?: components["schemas"]["GrantField"];
     } & { [key: string]: components["schemas"]["GrantField"] };
     GrantReward: {
       committed: components["schemas"]["Amount"];

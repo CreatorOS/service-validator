@@ -461,7 +461,6 @@ components:
         - applicantEmail
         - projectName
         - projectDetails
-        - fundingBreakdown
       properties:
         applicantName:
           $ref: '#/components/schemas/GrantField'
