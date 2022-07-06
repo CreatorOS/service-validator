@@ -68,6 +68,8 @@ export interface components {
       /** @description Token Symbol to be displayed */
       label: string;
       address: components["schemas"]["Address"];
+      /** @description The chain the token is on, leave undefined to denote same chain */
+      chainId?: number;
       /**
        * Format: integer
        * @description Decimal for token
