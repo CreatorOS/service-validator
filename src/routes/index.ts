@@ -9,5 +9,6 @@ export default {
 	validateReviewSet: async() => (await import('./validateReviewSet')).default,
 	validateRubricSet: async() => (await import('./validateRubricSet')).default,
 	validateWorkspaceCreate: async() => (await import('./validateWorkspaceCreate')).default,
+	validateWorkspaceMemberUpdate: async() => (await import('./validateWorkspaceMemberUpdate')).default,
 	validateWorkspaceUpdate: async() => (await import('./validateWorkspaceUpdate')).default,
 }

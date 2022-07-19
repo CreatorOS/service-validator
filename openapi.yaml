@@ -171,6 +171,24 @@ paths:
           $ref: '#/components/responses/ErrorResponse'
         '500':
           $ref: '#/components/responses/ErrorResponse'
+  /validate/workspace-member-update:
+    post:
+      operationId: validateWorkspaceMemberUpdate
+      summary: Update the details of a workspace member
+      tags:
+        - Validation
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WorkspaceMemberUpdate'
+      responses:
+        '200':
+          $ref: '#/components/responses/ValidationSuccessResponse'
+        '400':
+          $ref: '#/components/responses/ErrorResponse'
+        '500':
+          $ref: '#/components/responses/ErrorResponse'
 components:
   schemas:
     Error:
@@ -373,6 +391,16 @@ components:
           maxItems: 100
           items:
             $ref: '#/components/schemas/GrantProposedMilestone'
+    WorkspaceMemberUpdate:
+      type: object
+      properties:
+        fullName:
+          type: string
+          maxLength: 255
+        profilePictureIpfsHash:
+          type: string
+          maxLength: 128
+          description: IPFS hash of the profile picture
     GrantApplicationUpdate:
       type: object
       additionalProperties: false

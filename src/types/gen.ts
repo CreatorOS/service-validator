@@ -31,6 +31,9 @@ export interface paths {
   "/validate/rubric-set": {
     post: operations["validateRubricSet"];
   };
+  "/validate/workspace-member-update": {
+    post: operations["validateWorkspaceMemberUpdate"];
+  };
 }
 
 export interface components {
@@ -129,6 +132,11 @@ export interface components {
       fields: components["schemas"]["GrantApplicationFieldAnswers"];
       pii?: components["schemas"]["PIIAnswers"];
       milestones: components["schemas"]["GrantProposedMilestone"][];
+    };
+    WorkspaceMemberUpdate: {
+      fullName?: string;
+      /** @description IPFS hash of the profile picture */
+      profilePictureIpfsHash?: string;
     };
     GrantApplicationUpdate: {
       fields?: components["schemas"]["GrantApplicationFieldAnswers"];
@@ -381,6 +389,18 @@ export interface operations {
     requestBody: {
       content: {
         "application/json": components["schemas"]["RubricSetRequest"];
+      };
+    };
+  };
+  validateWorkspaceMemberUpdate: {
+    responses: {
+      200: components["responses"]["ValidationSuccessResponse"];
+      400: components["responses"]["ErrorResponse"];
+      500: components["responses"]["ErrorResponse"];
+    };
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["WorkspaceMemberUpdate"];
       };
     };
   };
