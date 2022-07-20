@@ -277,6 +277,7 @@ components:
       type: string
       description: Chain ID of the network
       enum:
+        - '1313161555'
         - '44787'
         - '42220'
         - '2153'

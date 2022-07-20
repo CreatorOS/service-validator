@@ -83,6 +83,7 @@ export interface components {
     };
     /** @description Chain ID of the network */
     SupportedNetwork:
+      | "1313161555"
       | "44787"
       | "42220"
       | "2153"
