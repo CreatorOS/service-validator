@@ -8,7 +8,7 @@ async function fetchTokenPriceFunction() {
 	const symbol = 'BTC'
 	new Promise(async(resolve, reject) => {
 		try {
-			response = await axios.get(`https://pro-api.coinmarketcap.com/v2/tools/price-conversion/items?=amount=${amount}&symbol=${symbol}`, {
+			response = await axios.get(`https://pro-api.coinmarketcap.com/v2/tools/price-conversion/items?=amount=${amount}&symbol=${symbol}&convert=USD`, {
 				headers: {
 					'X-CMC_PRO_API_KEY': '9447d104-00b3-42db-8721-eef8e61a3332',
 				},
