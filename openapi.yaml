@@ -27,6 +27,25 @@ paths:
           $ref: '#/components/responses/ErrorResponse'
         '500':
           $ref: '#/components/responses/ErrorResponse'
+      parameters:
+        - name: symbol
+          in: path
+          description: symbol of token to fetch
+          required: true
+          schema:
+            type: array
+            items:
+              type: string  
+          style: simple
+        - name: amount
+          in: path
+          description: amount of token to fetch
+          required: true
+          schema:
+            type: array
+            items:
+              type: string  
+          style: simple
   /validate/grant-create:
     post:
       operationId: validateGrantCreate

@@ -305,6 +305,14 @@ export interface components {
 
 export interface operations {
   fetchTokenPrice: {
+    parameters: {
+      path: {
+        /** symbol of token to fetch */
+        symbol: string[];
+        /** amount of token to fetch */
+        amount: string[];
+      };
+    };
     responses: {
       200: components["responses"]["TokenFetchSuccess"];
       400: components["responses"]["ErrorResponse"];
