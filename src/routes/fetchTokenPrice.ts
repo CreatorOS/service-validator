@@ -1,8 +1,7 @@
-const IS_TEST = process.env.NODE_ENV === 'test'
+import { Handler } from "../utils/make-api"; 
+const axios = require('axios');
 
-const axios = require('axios')
-
-async function fetchTokenPriceFunction() {
+const fetchTokenPriceFunction: Handler<'fetchTokenPrice'> = async ({}) => {
 	let response = null
 	const amount = 1
 	const symbol = 'BTC'
@@ -28,7 +27,7 @@ async function fetchTokenPriceFunction() {
 	})
 
 	return {
-		data: response
+		data: response!
 	}
 }
 
