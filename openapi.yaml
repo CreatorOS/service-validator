@@ -9,6 +9,24 @@ servers:
   - url: http://localhost:3001
     description: Local server
 paths:
+  /fetch/token-price:
+      get:
+        operationId: fetchTokenPrice
+        summary: Provide token price
+        tags:
+          - Token price fetch
+        requestBody:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenFetchRequest'
+        responses:
+          '200':
+            $ref: '#/components/responses/TokenFetchSuccess'
+          '400':
+            $ref: '#/components/responses/ErrorResponse'
+          '500':
+            $ref: '#/components/responses/ErrorResponse'
   /validate/grant-create:
     post:
       operationId: validateGrantCreate
@@ -273,6 +291,11 @@ components:
           type: string
           description: IPFS hash of token icon
           maxLength: 128
+    TokenFetchRequest:
+      type: string
+      description: Token fetch request 
+      required:
+        - tokenId
     SupportedNetwork:
       type: string
       description: Chain ID of the network
@@ -722,6 +745,20 @@ components:
       maxLength: 255
       example: '0x71C7656EC7ab88b098defB751B7411C5f6d8976F'
   responses:
+    tokenFetchSuccess:
+      description: Token fetching was a success
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: false
+              required:
+                - data
+              properties:
+                data:
+                  type: string
+                  description: token price data from CMC
+                  example: '1000'
     ValidationSuccessResponse:
       description: Validation was success, data pushed to IPFS & pinned
       content:
