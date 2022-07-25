@@ -5,7 +5,7 @@ import { Handler, Operation } from './make-api'
 const IS_TEST = process.env.NODE_ENV === 'test'
 
 async function makeUploaderFunction<T extends Operation>(operation: T) {
-	const handler: Handler<T> = async(req) => {
+	const handler: Handler<T> = async(req: any) => {
 		const createdAt = new Date()
 		// add additional metadata to the application
 		const fullData = { ...req, createdAt }
