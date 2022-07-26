@@ -1,10 +1,10 @@
 const axios = require('axios')
 
-const fetchTokenPriceFunction = async(amount, symbol) => {
-	let response = null
+const fetchTokenPriceFunction = async(symbol) => {
+	let response = null as any
 	new Promise(async(resolve, reject) => {
 		try {
-			response = await axios.get(`https://pro-api.coinmarketcap.com/v2/tools/price-conversion?amount=${amount}&symbol=${symbol}&convert=USD`, {
+			response = await axios.get(`https://pro-api.coinmarketcap.com/v2/cryptocurrency/quotes/latest?symbol=${symbol}&convert=USD`, {
 				headers: {
 					'X-CMC_PRO_API_KEY': '9447d104-00b3-42db-8721-eef8e61a3332',
 				},
@@ -12,14 +12,13 @@ const fetchTokenPriceFunction = async(amount, symbol) => {
 		} catch(ex) {
 			response = null
 			// error
-			console.log(ex)
 			reject(ex)
 		}
 
 		if(response) {
 			// success
-			console.log(response)
 			resolve(response)
+			console.log(response.data.data.FRA[0].quote.USD.price)
 		}
 	})
 

@@ -5,10 +5,8 @@ import { describeWithApp } from './test-setup'
 
 describeWithApp('Token Tests', app => {
 	it('fetches token price', async() => {
-        const fetch = await fetchTokenPriceFunction(1, 'BTC');
+        const fetch = await fetchTokenPriceFunction('FRA');
 
-        expect(fetch.data).toBeDefined();
-
-        console.log(fetch.data)
+        expect(fetch.data.data.quote).toBeDefined();
 	})
 })
