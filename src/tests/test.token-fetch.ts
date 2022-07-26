@@ -1,4 +1,4 @@
-import fetchTokenPriceFunction from '../routes/fetchTokenPrice'
+import fetchTokenPriceFunction from '../utils/fetch-token-price'
 import { describeWithApp } from './test-setup'
 
 describeWithApp('Token Tests', app => {
