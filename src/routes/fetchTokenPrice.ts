@@ -18,7 +18,6 @@ const fetchTokenPriceFunction = async(symbol) => {
 		if(response) {
 			// success
 			resolve(response)
-			console.log(response.data.data.FRA[0].quote.USD.price)
 		}
 	})
 
