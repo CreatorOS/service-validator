@@ -1,10 +1,8 @@
-import fetchTokenPriceFunction from '../utils/fetch-token-price'
+import request from 'supertest'
 import { describeWithApp } from './test-setup'
 
 describeWithApp('Token Tests', app => {
 	it('fetches token price', async() => {
-		const fetch = await fetchTokenPriceFunction('FRA')
-
-		expect(fetch.data.data.quote).toBeDefined()
+		await request(app).get('/fetch/token-price').query('BTC').expect(200)
 	})
 })

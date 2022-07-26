@@ -306,11 +306,9 @@ export interface components {
 export interface operations {
   fetchTokenPrice: {
     parameters: {
-      path: {
+      query: {
         /** symbol of token to fetch */
-        symbol: string[];
-        /** amount of token to fetch */
-        amount: string[];
+        symbol: string;
       };
     };
     responses: {
