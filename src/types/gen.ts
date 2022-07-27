@@ -270,7 +270,7 @@ export interface components {
       content: {
         "application/json": {
           /**
-           * @description token price data from CMC
+           * @description token price data in USD from CMC
            * @example 1000
            */
           data: string;
@@ -315,11 +315,6 @@ export interface operations {
       200: components["responses"]["TokenFetchSuccess"];
       400: components["responses"]["ErrorResponse"];
       500: components["responses"]["ErrorResponse"];
-    };
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["TokenFetchRequest"];
-      };
     };
   };
   validateGrantCreate: {

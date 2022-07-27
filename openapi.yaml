@@ -15,11 +15,6 @@ paths:
       summary: Provide token price
       tags:
         - Token price fetch
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/TokenFetchRequest'
       responses:
         '200':
           $ref: '#/components/responses/TokenFetchSuccess'
@@ -31,6 +26,7 @@ paths:
         - name: symbol
           in: query
           description: symbol of token to fetch
+          example: '0.00002'
           required: true
           schema:
             type: string
@@ -765,7 +761,7 @@ components:
             properties:
               data:
                 type: string
-                description: token price data from CMC
+                description: token price data in USD from CMC
                 example: '1000'
     ValidationSuccessResponse:
       description: Validation was success, data pushed to IPFS & pinned
