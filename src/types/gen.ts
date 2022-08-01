@@ -85,7 +85,7 @@ export interface components {
       iconHash: string;
     };
     /** @description Token fetch request */
-    TokenFetchRequest: string;
+    TokenFetchSuccess: string;
     /** @description Chain ID of the network */
     SupportedNetwork:
       | "1313161555"

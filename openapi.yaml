@@ -12,7 +12,7 @@ paths:
   /fetch/token-price:
     get:
       operationId: fetchTokenPrice
-      summary: Provide token price
+      summary: Provide token price in USD
       tags:
         - Token price fetch
       responses:
@@ -26,7 +26,7 @@ paths:
         - name: symbol
           in: query
           description: symbol of token to fetch
-          example: '0.00002'
+          example: 'BTC'
           required: true
           schema:
             type: string
@@ -294,7 +294,7 @@ components:
           type: string
           description: IPFS hash of token icon
           maxLength: 128
-    TokenFetchRequest:
+    TokenFetchSuccess:
       type: string
       description: Token fetch request 
       required:
