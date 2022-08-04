@@ -99,7 +99,9 @@ export interface components {
       | "10"
       | "137"
       | "80001"
-      | "4";
+      | "4"
+      | "40"
+      | "41";
     GrantField: {
       /** @description Human readable title of the field */
       title: string;

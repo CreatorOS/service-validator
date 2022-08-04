@@ -294,6 +294,8 @@ components:
         - '137'
         - '80001'
         - '4'
+        - '40'
+        - '41'
     GrantField:
       type: object
       additionalProperties: false
