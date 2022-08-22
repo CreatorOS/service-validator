@@ -1,26 +1,16 @@
-import dotenv from 'dotenv'
-dotenv.config({ path: '.env.test' })
-
+import axios from 'axios'
 import { randomBytes } from 'crypto'
-import { getWeb3Client, uploadToIPFS } from '../utils/ipfs'
-
-jest.setTimeout(30_000)
+import { getUrlForIPFSHash, uploadToIPFS } from '../utils/ipfs'
 
 describe('IPFS Upload Tests', () => {
 	it('should upload a file to IPFS', async() => {
-		const client = getWeb3Client()
-		
 		const json = { id: randomBytes(8).toString('hex') }
-		const { hash } = await uploadToIPFS(JSON.stringify(json), 'myFile.json')
+		
+		const { hash } = await uploadToIPFS(JSON.stringify(json))
 		expect(hash).toBeTruthy()
-		
-		const res = await client.get(hash)
-		expect(res?.ok).toBeTruthy()
-		
-		const files = await res?.files()
-		if(files) {
-			const file = files[0]
-			expect(file?.cid).toBe(hash)
-		}
+
+		const url = await getUrlForIPFSHash(hash)
+		const data = await axios.post(url)
+		expect(data.data).toEqual(json)
 	})
 })

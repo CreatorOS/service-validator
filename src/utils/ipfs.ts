@@ -1,42 +1,55 @@
 import { Boom } from '@hapi/boom'
-import { File, Web3Storage } from 'web3.storage'
+import axios from 'axios'
+import FormData from 'form-data'
 import logger from './logger'
 
-const token = (() => {
-	const { WEB3_STORAGE_API_TOKEN } = process.env
-	if(WEB3_STORAGE_API_TOKEN) {
-		return WEB3_STORAGE_API_TOKEN.toString()
+const IPFS_UPLOAD_ENDPOINT = 'https://api.thegraph.com/ipfs/api/v0/add'
+
+const IPFS_AUTH = (() => {
+	const { INFURA_PROJECT_ID, INFURA_PROJECT_SECRET } = process.env
+	if(INFURA_PROJECT_ID && INFURA_PROJECT_SECRET) {
+		return { username: INFURA_PROJECT_ID, password: INFURA_PROJECT_SECRET }
 	}
 
-	logger.info('A token is needed. You can create one on https://web3.storage')
-	return ''
+	logger.info('no credentials present for infura IPFS upload, uploaded documents will not be pinned')
 })()
-
-export const getWeb3Client = () => {
-	const storage = new Web3Storage({ token })
-	return storage
-}
 
 export const uploadToIPFS = async(
 	data: string | Buffer,
-	filename: string
+	filename?: string
 ): Promise<{ hash: string }> => {
+	const form = new FormData()
+	const opts: FormData.AppendOptions = {
+		filename,
+		contentType: 'application/json'
+	}
+	form.append('file', data, opts)
 	try {
-		const storage = getWeb3Client()
-		const files: File[] = []
-		const filedata: (string | Buffer)[] = []
-		filedata.push(data)
-		const file = new File(filedata, filename)
-		files.push(file)
-		const result = await storage.put(files, { wrapWithDirectory: false })
-		return { hash: result }
-
+		const result = await axios.post<{ Hash: string }>(
+			IPFS_UPLOAD_ENDPOINT,
+			form,
+			{
+				auth: IPFS_AUTH,
+				responseType: 'json',
+				headers: { 'Content-Type': `multipart/form-data; boundary=${form.getBoundary()}` }
+			}
+		)
+		return { hash: result.data.Hash }
 	} catch(error) {
+		// add data to the error so it can be tracked later
+		let errorData: any
+		if(axios.isAxiosError(error)) {
+			errorData = error.response?.data
+			console.log(errorData)
+		}
+		
 		// add a descriptive message
-		throw new Boom('IPFS upload failed', { data: error })
+		throw new Boom('IPFS upload failed', { data: errorData })
 	}
 }
 
 export const getUrlForIPFSHash = (hash: string) => (
-	`https://dweb.link/ipfs/${hash}`
+	// https://docs.ipfs.io/concepts/what-is-ipfs
+	// https://infura.io/docs/ipfs#section/Getting-Started/Pin-a-file
+	`https://api.thegraph.com/ipfs/api/v0/cat?arg=${hash}`
 )
