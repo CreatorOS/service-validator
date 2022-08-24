@@ -410,6 +410,8 @@ components:
           type: string
           maxLength: 128
           description: IPFS hash of the profile picture
+        publicKey:
+          $ref: '#/components/schemas/PublicKey'
     GrantApplicationUpdate:
       type: object
       additionalProperties: false
@@ -605,6 +607,8 @@ components:
       properties:
         reviewer:
           $ref: '#/components/schemas/Address'
+        reviewerPublicKey:
+          $ref: '#/components/schemas/PublicKey'
         publicReviewDataHash:
           type: string
           maxLength: 255
