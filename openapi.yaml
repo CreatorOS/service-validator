@@ -323,7 +323,7 @@ components:
           type: array
           items:
             type: string
-            maxLength: 256
+            maxLength: 1024
           maxItems: 20
         pii:
           description: >-
@@ -339,7 +339,7 @@ components:
       properties:
         title:
           type: string
-          maxLength: 255
+          maxLength: 1024
         amount:
           $ref: '#/components/schemas/Amount'
     GrantApplicationFieldAnswer:
