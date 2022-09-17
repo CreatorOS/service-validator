@@ -138,6 +138,7 @@ export interface components {
     GrantApplicationRequest: {
       grantId: string;
       applicantId: components["schemas"]["OwnerID"];
+      applicantPublicKey?: components["schemas"]["PublicKey"];
       fields: components["schemas"]["GrantApplicationFieldAnswers"];
       pii?: components["schemas"]["PIIAnswers"];
       milestones: components["schemas"]["GrantProposedMilestone"][];

@@ -391,6 +391,8 @@ components:
           type: string
         applicantId:
           $ref: '#/components/schemas/OwnerID'
+        applicantPublicKey:
+           $ref: '#/components/schemas/PublicKey'
         fields:
           $ref: '#/components/schemas/GrantApplicationFieldAnswers'
         pii:
