@@ -227,7 +227,7 @@ const PASS_WORKSPACES: IWorkspaceCreateRequest[] = [
 				industry: 'Social',
 				website: 'http://www.partner.com',
 				partnerImageHash: 'QmXoypizjW3WknFiJnKLwHCnL72vedxjQkDDP1mXWo6uco' }],
-		supportedNetworks: ['4'],
+		supportedNetworks: ['5'],
 		socials: [
 			{ name: 'twitter', value: chance.url() },
 			{ name: 'discord', value: chance.url() }
