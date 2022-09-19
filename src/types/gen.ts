@@ -82,30 +82,7 @@ export interface components {
       iconHash: string;
     };
     /** @description Chain ID of the network */
-    SupportedNetwork:
-      | "1313161555"
-      | "44787"
-      | "42220"
-      | "9000"
-      | "2153"
-      | "100"
-      | "5"
-      | "1666600000"
-      | "1666700000"
-      | "8217"
-      | "1001"
-      | "42"
-      | "1088"
-      | "588"
-      | "1287"
-      | "245022926"
-      | "69"
-      | "10"
-      | "137"
-      | "80001"
-      | "4"
-      | "40"
-      | "41";
+    SupportedNetwork: "42220" | "5" | "10" | "137";
     GrantField: {
       /** @description Human readable title of the field */
       title: string;

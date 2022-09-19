@@ -277,29 +277,10 @@ components:
       type: string
       description: Chain ID of the network
       enum:
-        - '1313161555'
-        - '44787'
         - '42220'
-        - '9000'
-        - '2153'
-        - '100'
         - '5'
-        - '1666600000'
-        - '1666700000'
-        - '8217'
-        - '1001'
-        - '42'
-        - '1088'
-        - '588'
-        - '1287'
-        - '245022926'
-        - '69'
         - '10'
         - '137'
-        - '80001'
-        - '4'
-        - '40'
-        - '41'
     GrantField:
       type: object
       additionalProperties: false
@@ -392,7 +373,7 @@ components:
         applicantId:
           $ref: '#/components/schemas/OwnerID'
         applicantPublicKey:
-           $ref: '#/components/schemas/PublicKey'
+          $ref: '#/components/schemas/PublicKey'
         fields:
           $ref: '#/components/schemas/GrantApplicationFieldAnswers'
         pii:
