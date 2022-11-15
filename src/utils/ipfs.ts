@@ -36,6 +36,7 @@ export const uploadToIPFS = async(
 		)
 		return { hash: result.data.Hash }
 	} catch(error) {
+		console.log('IPFS Upload Error: ', error)
 		// add data to the error so it can be tracked later
 		let errorData: any
 		if(axios.isAxiosError(error)) {
