@@ -663,13 +663,11 @@ components:
         startDate:
           type: string
           format: date-time
-          maxLength: 128
           description: Start date for proposal acceptations
         endDate:
           type: string
           format: date-time
           description: Deadline for proposal submission
-          maxLength: 128
         details:
           type: string
           maxLength: 4096
@@ -712,13 +710,11 @@ components:
         startDate:
           type: string
           format: date-time
-          maxLength: 128
           description: Start date for proposal acceptations
         endDate:
           type: string
           format: date-time
           description: Deadline for proposal submission
-          maxLength: 128
         details:
           type: string
           maxLength: 4096
@@ -726,17 +722,16 @@ components:
           $ref: '#/components/schemas/Amount'
         payoutType:
           type: string
-          maxLength: 128
           enum: [
-            "in one go",
-            "milestone"
+            "in-one-go",
+            "milestones"
           ]
         reviewType: 
           type: string
           maxLength: 128
           enum: [
             "voting",
-            "rubric"
+            "rubrics"
           ]
         creatorId:
           $ref: '#/components/schemas/OwnerID'
