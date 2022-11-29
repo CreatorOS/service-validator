@@ -676,17 +676,15 @@ components:
         payoutType:
           type: string
           maxLength: 128
-          enum: [
-            "in one go",
-            "milestone"
-          ]
+          enum: 
+            - "in one go"
+            - "milestone"
         reviewType: 
           type: string
           maxLength: 128
-          enum: [
-            "voting",
-            "rubric"
-          ]
+          enum: 
+            - "voting"
+            - "rubric"
         creatorId:
           $ref: '#/components/schemas/OwnerID'
         workspaceId:
@@ -722,10 +720,9 @@ components:
           $ref: '#/components/schemas/Amount'
         payoutType:
           type: string
-          enum: [
-            "in-one-go",
-            "milestones"
-          ]
+          enum: 
+            - "in-one-go"
+            - "milestones"
         reviewType: 
           type: string
           maxLength: 128
