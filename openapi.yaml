@@ -647,9 +647,12 @@ components:
       additionalProperties: false
       required:
         - title
-        - summary
+        - startDate
+        - endDate
         - details
         - reward
+        - payoutType
+        - reviewType
         - creatorId
         - workspaceId
         - fields
@@ -657,19 +660,31 @@ components:
         title:
           type: string
           maxLength: 255
-        summary:
+        startDate:
           type: string
-          maxLength: 1024
+          format: date-time
+          description: Start date for proposal acceptations
+        endDate:
+          type: string
+          format: date-time
+          description: Deadline for proposal submission
         details:
           type: string
           maxLength: 4096
-        deadline:
-          type: string
-          format: date-time
-          description: Deadline of the application
-          maxLength: 128
         reward:
-          $ref: '#/components/schemas/GrantReward'
+          $ref: '#/components/schemas/Amount'
+        payoutType:
+          type: string
+          maxLength: 128
+          enum: 
+            - "in one go"
+            - "milestone"
+        reviewType: 
+          type: string
+          maxLength: 128
+          enum: 
+            - "voting"
+            - "rubric"
         creatorId:
           $ref: '#/components/schemas/OwnerID'
         workspaceId:
@@ -690,19 +705,36 @@ components:
         title:
           type: string
           maxLength: 255
-        summary:
+        startDate:
           type: string
-          maxLength: 1024
+          format: date-time
+          description: Start date for proposal acceptations
+        endDate:
+          type: string
+          format: date-time
+          description: Deadline for proposal submission
         details:
           type: string
           maxLength: 4096
-        deadline:
-          type: string
-          format: date-time
-          description: Deadline of the application
-          maxLength: 128
         reward:
-          $ref: '#/components/schemas/GrantReward'
+          $ref: '#/components/schemas/Amount'
+        payoutType:
+          type: string
+          enum: 
+            - "in-one-go"
+            - "milestones"
+        reviewType: 
+          type: string
+          maxLength: 128
+          enum: 
+            - "voting"
+            - "rubrics"
+        creatorId:
+          $ref: '#/components/schemas/OwnerID'
+        workspaceId:
+          type: string
+          description: the workspace the grant is from
+          maxLength: 128
         fields:
           $ref: '#/components/schemas/GrantFieldMap'
         grantManagers:
