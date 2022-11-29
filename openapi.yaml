@@ -726,10 +726,9 @@ components:
         reviewType: 
           type: string
           maxLength: 128
-          enum: [
-            "voting",
-            "rubrics"
-          ]
+          enum: 
+            - "voting"
+            - "rubrics"
         creatorId:
           $ref: '#/components/schemas/OwnerID'
         workspaceId:
